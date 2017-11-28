@@ -1,0 +1,20 @@
+#MyEclipse Hibernate Properties
+#Tue Sep 05 18:05:21 CST 2017
+genBasicCompId=false
+sessionFactoryName=com.ssh.until.HibernateSessionFactory
+profile=
+daoSFId=
+jndiPath=
+detectM2M=false
+reStrategyClass=
+detectO2O=false
+springDaoFile=
+useJavaTypes=true
+keyGenerator=native
+genVersionTag=false
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=
+configFile=/ZwSshVote/src/applicationContext.xml
+createConfigFile=true
