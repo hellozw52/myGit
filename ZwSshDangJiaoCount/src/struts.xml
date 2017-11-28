@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<constant name="struts.devMode" value="true" />
+
+	<constant name="struts.multipart.maxSize" value="2147483648" />
+
+	<constant name="struts.objectFactory" value="spring" />
+	
+	<!-- 站点信息包接口  -->
+	<package name="siteinfo" namespace="/interface" extends="struts-default,json-default">
+
+		<action name="getSiteNameByTvn" class="com.ssh.action.SiteAction"
+			method="getCurrentTvnSiteName">
+			<result type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+	
+	</package>
+	
+</struts>    
