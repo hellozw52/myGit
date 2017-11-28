@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+
+	<constant name="struts.multipart.maxSize" value="2147483648" />
+
+	<constant name="struts.objectFactory" value="spring" />
+
+	<package name="index" namespace="/" extends="struts-default,json-default">
+
+		<action name="index" class="com.ssh.action.IndexAction"
+			method="index">
+			<result>/admin/index.jsp</result>
+		</action>
+
+	</package>
+	
+	<!-- 用户包  -->
+	<package name="user" namespace="/" extends="struts-default,json-default">
+
+		<!-- 用户  -->
+		<action name="user" class="com.ssh.action.UserAction"
+			method="user">
+			<result>/admin/user.jsp</result>
+		</action>
+
+		<action name="userList" class="com.ssh.action.UserAction"
+			method="list">
+			<result type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+
+		<action name="addUser" class="com.ssh.action.UserAction"
+			method="add">
+			<result>/admin/user.jsp</result>
+		</action>
+
+		<action name="deleteUser" class="com.ssh.action.UserAction"
+			method="delete">
+			<result>/admin/user.jsp</result>
+		</action>
+		
+		<action name="updateUser" class="com.ssh.action.UserAction"
+			method="update">
+			<result>/admin/user.jsp</result>
+		</action>
+	
+	</package>
+		
+	<!-- 商铺包  -->
+	<package name="shop" namespace="/" extends="struts-default,json-default">
+
+		<!-- 店铺  -->
+		<action name="shop" class="com.ssh.action.ShopAction"
+			method="shop">
+			<result>/admin/shop.jsp</result>
+		</action>
+
+		<action name="list" class="com.ssh.action.ShopAction"
+			method="list">
+			<result type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+
+		<action name="add" class="com.ssh.action.ShopAction"
+			method="add">
+			<result>/admin/shop.jsp</result>
+		</action>
+
+		<action name="delete" class="com.ssh.action.ShopAction"
+			method="delete">
+			<result>/admin/shop.jsp</result>
+		</action>
+		
+		<action name="update" class="com.ssh.action.ShopAction"
+			method="update">
+			<result>/admin/shop.jsp</result>
+		</action>
+
+
+		<!-- 店铺分类  -->
+		<action name="shopCategory" class="com.ssh.action.ShopCategoryAction"
+			method="shopCategory">
+			<result>/admin/shopcategory.jsp</result>
+		</action>
+		
+		<action name="categoryList" class="com.ssh.action.ShopCategoryAction"
+			method="list">
+			<result type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+
+		<action name="addCategory" class="com.ssh.action.ShopCategoryAction"
+			method="add">
+			<result>/admin/shopcategory.jsp</result>
+		</action>
+		
+		<action name="updateCategory" class="com.ssh.action.ShopCategoryAction"
+			method="update">
+			<result>/admin/shopcategory.jsp</result>
+		</action>
+		
+		<action name="deleteCategory" class="com.ssh.action.ShopCategoryAction"
+			method="delete">
+			<result>/admin/shopcategory.jsp</result>
+		</action>
+		
+	</package>
+
+</struts>

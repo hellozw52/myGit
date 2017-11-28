@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+encoding//WebRoot/admin/index.jsp=UTF-8
+encoding//WebRoot/admin/shop.jsp=UTF-8
+encoding//src/beans.xml=UTF-8
+encoding//src/com/ssh/action/BaseAction.java=UTF-8
+encoding//src/com/ssh/action/ShopAction.java=UTF-8
+encoding//src/com/ssh/action/ShopCategoryAction.java=UTF-8
+encoding//src/com/ssh/dao/ShopDao.java=UTF-8
+encoding//src/com/ssh/dao/impl/ShopDaoImpl.java=UTF-8
+encoding//src/com/ssh/pojo/Shop.hbm.xml=UTF-8
+encoding//src/com/ssh/pojo/Shop.java=UTF-8
+encoding//src/com/ssh/pojo/ShopCategory.hbm.xml=UTF-8
+encoding//src/com/ssh/pojo/ShopCategory.java=UTF-8
+encoding//src/com/ssh/service/ShopService.java=UTF-8
+encoding//src/com/ssh/service/impl/ShopServiceImpl.java=UTF-8
+encoding//src/struts.xml=UTF-8
+encoding/<project>=UTF-8

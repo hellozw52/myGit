@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ssh.pojo">
+	<class name="Shop" table="shop">
+		<id name="shopid" type="int">
+		    <column name="shopid"/>
+			<generator class="increment" />
+		</id>
+
+		<property name="shopname" length="10"></property>
+		<property name="shoplocation" length="10"></property>
+		<property name="shopcid" length="10"></property>
+		<property name="goodsidlist" length="10"></property>
+		<property name="shopimage" length="10"></property>
+	</class>
+</hibernate-mapping>

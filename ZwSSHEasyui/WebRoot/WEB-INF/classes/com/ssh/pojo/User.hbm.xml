@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.ssh.pojo">
+	<class name="User" table="user">
+		<id name="userid" type="int">
+		    <column name="userid"/>
+			<generator class="increment" />
+		</id>
+
+		<property name="username" length="10"></property>
+		<property name="userpass" length="10"></property>
+		<property name="useremail" length="30"></property>
+		<property name="usergender" length="2" type="int"></property>
+		<property name="userphone" length="30"></property>
+		<property name="userimg" length="255" type="string"></property>
+	</class>
+</hibernate-mapping>
