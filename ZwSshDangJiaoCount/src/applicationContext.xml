@@ -12,9 +12,11 @@
 
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
+		 
 		<property name="jdbcUrl"
 			value="jdbc:sqlserver://10.63.70.164:1433;databaseName=hnyxnew">
 		</property>
+		 
 		<property name="user" value="sa"></property>
 		<property name="password" value="hncatv123"></property>
 		<property name="initialPoolSize" value="3" />
