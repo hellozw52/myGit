@@ -21,7 +21,7 @@ public class MybatisTest {
     @Test
     public void testAdd() {
 	Category category = new Category();
-	category.setName("new Category");
+	category.setName("new add Category");
 	categoryMapper.add(category);
     }
 

@@ -11,11 +11,30 @@ import com.how2java.service.CategoryService;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
+    
+    //注入categoryMapper
     @Autowired
     CategoryMapper categoryMapper;
 
+    /* 
+     * list
+     */
     public List<Category> list() {
 	return categoryMapper.list();
+    }
+
+    /* 
+     * get
+     */
+    public Category getCategory(int id) {
+	return categoryMapper.get(id);
+    }
+
+    /* 
+     * update 
+     */
+    public int updateCategory(Category category) {
+	return categoryMapper.update(category);
     };
 
 }

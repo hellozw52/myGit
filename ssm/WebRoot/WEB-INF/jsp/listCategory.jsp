@@ -8,10 +8,10 @@
         <td>id</td>
         <td>name</td>
     </tr>
-    <c:forEach items="${cs}" var="c" varStatus="st">
+    <c:forEach items="${categorys}" var="category" varStatus="st">
         <tr>
-            <td>${c.id}</td>
-            <td>${c.name}</td>
+            <td>${category.id}</td>
+            <td>${category.name}</td>
               
         </tr>
     </c:forEach>
