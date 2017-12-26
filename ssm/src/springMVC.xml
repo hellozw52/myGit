@@ -12,19 +12,20 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
 
-
+	<!-- 扫描Controller,并将其生命周期纳入Spring管理 -->
 	<context:annotation-config />
-
 	<context:component-scan base-package="com.how2java.controller">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
+	<!-- 注解驱动，以使得访问路径与方法的匹配可以通过注解配置 -->
 	<mvc:annotation-driven />
-
+	
+	<!-- 静态页面，如html,css,js,images可以访问 -->
 	<mvc:default-servlet-handler />
 
-
+	<!-- 视图定位到/WEB/INF/jsp 这个目录下 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
