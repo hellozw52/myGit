@@ -9,6 +9,10 @@ import com.how2java.mapper.CategoryMapper;
 import com.how2java.pojo.Category;
 import com.how2java.service.CategoryService;
 
+/**
+ * @author zhaowei
+ *
+ */
 @Service
 public class CategoryServiceImpl implements CategoryService {
     
@@ -17,24 +21,38 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryMapper categoryMapper;
 
     /* 
-     * list
+     * add
      */
-    public List<Category> list() {
-	return categoryMapper.list();
+    public void addCategory(Category category) {
+	categoryMapper.add(category);
+    };
+    
+    /* 
+     * delete
+     */
+    public void deleteCategory(int id) {
+	categoryMapper.delete(id);
     }
-
+    
+    /* 
+     * update 
+     */
+    public int updateCategory(Category category) {
+	return categoryMapper.update(category);
+    }
+    
     /* 
      * get
      */
     public Category getCategory(int id) {
 	return categoryMapper.get(id);
     }
-
+    
     /* 
-     * update 
+     * list
      */
-    public int updateCategory(Category category) {
-	return categoryMapper.update(category);
-    };
+    public List<Category> list() {
+	return categoryMapper.list();
+    }
 
 }

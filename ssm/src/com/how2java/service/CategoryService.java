@@ -6,10 +6,14 @@ import com.how2java.pojo.Category;
 
 public interface CategoryService {
 
-    List<Category> list();
-
-    Category getCategory(int id);
-
+    void addCategory(Category category);
+    
+    void deleteCategory(int id);
+    
     int updateCategory(Category category);
+    
+    Category getCategory(int id);
+    
+    List<Category> list();
 
 }

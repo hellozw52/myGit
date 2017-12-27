@@ -19,13 +19,6 @@ public class MybatisTest {
     private CategoryMapper categoryMapper;
 
     @Test
-    public void testAdd() {
-	Category category = new Category();
-	category.setName("new add Category");
-	categoryMapper.add(category);
-    }
-
-    @Test
     public void testList() {
 	System.out.println(categoryMapper);
 	List<Category> cs = categoryMapper.list();
