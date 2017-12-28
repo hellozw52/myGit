@@ -55,4 +55,11 @@ public class CategoryServiceImpl implements CategoryService {
 	return categoryMapper.list();
     }
 
+    /* 
+     * listCategoryInJsonByName
+     */
+    public List<Category> listCategoryByName(String name) {
+	return categoryMapper.listCategoryByName(name);
+    }
+
 }

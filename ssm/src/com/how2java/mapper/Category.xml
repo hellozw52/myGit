@@ -4,6 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.how2java.mapper.CategoryMapper">
+	
 	<insert id="add" parameterType="Category">
 		insert into category_ ( id,name ) values (#{id},#{name})
 	</insert>
@@ -16,12 +17,17 @@
 		update category_ set name=#{name} where id=#{id}
 	</update>
 	
-	<select id="get" parameterType="_int" resultType="Category">
+	<select id="get" parameterType="int" resultType="Category">
 		select * from category_ where id= #{id}
 	</select>
 	
 	<select id="list" resultType="Category">
 		select * from category_
 	</select>
+	
+	<select id="listCategoryByName" parameterType="string" resultType="Category">
+		select * from category_ where name like CONCAT(CONCAT('%', #{name}), '%');
+	</select>
+	
 </mapper>
 

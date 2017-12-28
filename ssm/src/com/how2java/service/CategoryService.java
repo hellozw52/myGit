@@ -16,4 +16,6 @@ public interface CategoryService {
     
     List<Category> list();
 
+    List<Category> listCategoryByName(String name);
+
 }

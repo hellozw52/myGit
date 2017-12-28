@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.how2java.pojo.Category;
@@ -19,6 +20,45 @@ public class CategoryController {
     //注入categoryService
     @Autowired
     CategoryService categoryService;
+    
+    /**
+     * get 根据id查询结果  使用ResponseBody注解  返回json格式  
+     * 样例：http://127.0.0.1:8080/ssm/getCategoryInJson?id=3
+     * @return  {"id":3,"name":"category3"}
+     */
+    @RequestMapping("getCategoryInJson")
+    public @ResponseBody Category getCategoryInJson(@RequestParam("id") int id) {
+	
+	Category category = categoryService.getCategory(id);
+	// 返回查到的数据
+	return category;
+    }
+    
+    /**
+     * 查询所有结果集合  返回json格式
+     * 样例：http://127.0.0.1:8080/ssm/listCategoryInJson
+     * @return  [{"id":2,"name":"category2"},{"id":3,"name":"category3"},{"id":4,"name":"category4"},{"id":5,"name":"category5"},{"id":6,"name":"category6"},{"id":7,"name":"category7"},{"id":10,"name":"cc"},{"id":11,"name":"cc"},{"id":12,"name":"cc"},{"id":13,"name":"cc"},{"id":14,"name":"ccbb"},{"id":15,"name":"ccbb"},{"id":19,"name":"ccbb"},{"id":20,"name":"asdfasdf"},{"id":25,"name":"hiss"},{"id":10000,"name":"ccbb"},{"id":10001,"name":"asdf"},{"id":1003648,"name":"asdf"}]
+     */
+    @RequestMapping("listCategoryInJson")
+    public @ResponseBody List<Category> listCategoryInJson() {
+	
+	List<Category> categorys = categoryService.list();
+	// 返回查到的数据
+	return categorys;
+    }
+    
+    /**
+     * 根据name进行模糊查询  返回json格式
+     * 样例：http://127.0.0.1:8080/ssm/listCategoryInJsonByName?name=category
+     * @return  [{"id":3,"name":"category3"},{"id":4,"name":"category4"},{"id":5,"name":"category5"},{"id":6,"name":"category6"},{"id":7,"name":"category7"}]
+     */
+    @RequestMapping("listCategoryInJsonByName")
+    public @ResponseBody List<Category> listCategoryInJsonByName(@RequestParam("name") String name) {
+	
+	List<Category> categorys = categoryService.listCategoryByName(name);
+	// 返回查到的数据
+	return categorys;
+    }
     
     /**
      * add 传递id、name参数
@@ -119,5 +159,4 @@ public class CategoryController {
 	// 跳转至页面
 	return mav;
     }
-
 }

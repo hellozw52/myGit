@@ -16,6 +16,9 @@ public interface CategoryMapper {
      
     public List<Category> list();
     
+    //根据name模糊查询
+    public List<Category> listCategoryByName(String name);
+    
     public int count();  
     
 }
