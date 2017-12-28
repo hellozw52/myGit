@@ -10,7 +10,7 @@ public interface CategoryMapper {
        
     public void delete(int id);  
        
-    public int update(Category category);  
+    public void update(Category category);  
     
     public Category get(int id);  
      

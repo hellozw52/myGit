@@ -10,7 +10,7 @@ public interface CategoryService {
     
     void deleteCategory(int id);
     
-    int updateCategory(Category category);
+    void updateCategory(Category category);
     
     Category getCategory(int id);
     

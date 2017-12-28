@@ -37,8 +37,8 @@ public class CategoryServiceImpl implements CategoryService {
     /* 
      * update 
      */
-    public int updateCategory(Category category) {
-	return categoryMapper.update(category);
+    public void updateCategory(Category category) {
+	categoryMapper.update(category);
     }
     
     /* 

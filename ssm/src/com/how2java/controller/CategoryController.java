@@ -152,7 +152,7 @@ public class CategoryController {
 	// 根据参数，更新数据
 	Category category = categoryService.getCategory(id);
 	category.setName(name);
-	int updated = categoryService.updateCategory(category);
+	categoryService.updateCategory(category);
 
 	// 查询所有最新数据
 	List<Category> categorys = categoryService.list();
