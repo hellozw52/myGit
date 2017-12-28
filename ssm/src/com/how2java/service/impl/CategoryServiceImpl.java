@@ -62,4 +62,8 @@ public class CategoryServiceImpl implements CategoryService {
 	return categoryMapper.listCategoryByName(name);
     }
 
+    public int getTotalNum() {
+	return categoryMapper.count();
+    }
+
 }

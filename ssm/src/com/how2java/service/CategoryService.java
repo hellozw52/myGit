@@ -18,4 +18,6 @@ public interface CategoryService {
 
     List<Category> listCategoryByName(String name);
 
+    int getTotalNum();
+
 }
