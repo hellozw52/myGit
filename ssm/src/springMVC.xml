@@ -25,7 +25,7 @@
 	<!-- 静态页面，如html,css,js,images可以访问 -->
 	<mvc:default-servlet-handler />
 
-	<!-- 视图定位到/WEB/INF/jsp 这个目录下 -->
+	<!-- 视图定位到/WEB/INF/jsp 这个目录下。第一个属性为前缀，第二个属性为后缀 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
