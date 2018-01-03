@@ -1,9 +1,12 @@
 package com.how2java.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +22,26 @@ public class CategoryController {
     // 注入categoryService
     @Autowired
     CategoryService categoryService;
+    
+    
+    /**************************************返回json形式*********************************************/
+    /**
+     * 查询所有结果集合 返回json格式   样例：http://127.0.0.1:8080/ssm/category/listCategoryInJson
+     * {"DataArea":[{"id":2,"name":"cc"},{"id":3,"name":"category3"},{"id":4,"name":"category4"},{"id":5,"name":"category5"},{"id":6,"name":"category6"},{"id":7,"name":"category7"},{"id":10,"name":"cc"},{"id":11,"name":"cc"},{"id":12,"name":"cc"},{"id":13,"name":"cc"},{"id":14,"name":"ccbb"},{"id":15,"name":"ccbb"},{"id":19,"name":"ccbb"},{"id":20,"name":"asdfasdf"},{"id":25,"name":"hiss"},{"id":1229,"name":"ccbbsadf"},{"id":10000,"name":"ccbb"},{"id":10001,"name":"asdf"},{"id":23444,"name":"cc"},{"id":1003648,"name":"asdf"},{"id":123456789,"name":"cc"}],"totalnum":21}
+     * 在配置文件中对json格式进行配置！
+     */
+    @RequestMapping(value="/listCategoryInJson")
+    public @ResponseBody
+    Map<String, Object> listCategoryInJson() {
+
+	List<Category> categorys = categoryService.list();
+	//创建一个map，将所有数据结果存入
+	Map<String, Object> map = new HashMap<String, Object>();
+	map.put("DataArea", categorys);
+	map.put("TotalNum", categoryService.getTotalNum());
+	//以json格式的形式返回数据到前台
+	return map;
+    }
 
     /**
      * get 根据id查询结果 使用ResponseBody注解 返回json格式
@@ -27,26 +50,14 @@ public class CategoryController {
      */
     @RequestMapping(value="/getCategoryInJson")
     public @ResponseBody
-    Category getCategoryInJson(@RequestParam("id") int id) {
+    Map<String, Object> getCategoryInJson(@RequestParam("id") int id) {
 
 	Category category = categoryService.getCategory(id);
-	// 返回查到的数据
-	return category;
-    }
-
-    /**
-     * 查询所有结果集合 返回json格式 样例：http://127.0.0.1:8080/ssm/category/listCategoryInJson
-     * @return 
-     *         [{"id":2,"name":"category2"},{"id":3,"name":"category3"},{"id":4,"name"
-     *         :"category4"},{"id":5,"name":"category5"}...]
-     */
-    @RequestMapping(value="/listCategoryInJson")
-    public @ResponseBody
-    List<Category> listCategoryInJson() {
-
-	List<Category> categorys = categoryService.list();
-	// 返回查到的数据
-	return categorys;
+	//创建一个map，存入数据
+	Map<String, Object> map = new HashMap<String, Object>();
+	map.put("DataArea", category);
+	// 以json格式的形式返回数据到前台
+	return map;
     }
 
     /**
@@ -55,30 +66,34 @@ public class CategoryController {
      */
     @RequestMapping(value="getTotalNum")
     public @ResponseBody
-    int getTotalNum() {
+    Map<String, Object> getTotalNum() {
 
 	int totalnum = categoryService.getTotalNum();
-	// 返回查到的数据
-	return totalnum;
+	Map<String, Object> map = new HashMap<String, Object>();
+	map.put("TotalNum", totalnum);
+	// 返回总个数
+	return map;
     }
 
     /**
      * 根据name进行模糊查询 返回json格式
      * 样例：http://127.0.0.1:8080/ssm/category/listCategoryInJsonByName?name=category
-     * @return 
-     *         [{"id":3,"name":"category3"},{"id":4,"name":"category4"},{"id":5,"name"
-     *         :"category5"},{"id":6,"name":"category6"},{"id":7,"name":
-     *         "category7"}]
+     * {"DataArea":[{"id":3,"name":"category3"},{"id":4,"name":"category4"},{"id":5,"name":"category5"},{"id":6,"name":"category6"},{"id":7,"name":"category7"}]}
      */
     @RequestMapping(value="listCategoryInJsonByName")
     public @ResponseBody
-    List<Category> listCategoryInJsonByName(@RequestParam("name") String name) {
+    Map<String, Object> listCategoryInJsonByName(@RequestParam("name") String name) {
 
 	List<Category> categorys = categoryService.listCategoryByName(name);
-	// 返回查到的数据
-	return categorys;
+	//创建一个map，存入数据
+	Map<String, Object> map = new HashMap<String, Object>();
+	map.put("DataArea", categorys);
+	// 以json格式的形式返回数据到前台
+	return map;
     }
 
+    
+    /**************************************返回页面形式*********************************************/
     /**
      * add 传递id、name参数 样例：http://127.0.0.1:8080/ssm/category/addCategory?id=1&name=cc
      * @return

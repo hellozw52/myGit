@@ -33,4 +33,14 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<!-- 配置返回的json格式 -->
+	<bean  
+       class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+       <property name="messageConverters">  
+           <list>  
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>  
+           </list>  
+       </property>  
+   	</bean>  
 </beans>
