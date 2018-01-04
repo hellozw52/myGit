@@ -50,7 +50,6 @@ public class PersonController {
 
 	/**
 	 * 保存添加的数据
-	 * 
 	 * @param person
 	 * @return
 	 */
@@ -62,6 +61,7 @@ public class PersonController {
 
 	/**
 	 * 跳转到添加页面
+	 * 
 	 * savepage.jsp
 	 * @return
 	 */
@@ -86,6 +86,7 @@ public class PersonController {
 
 	/**
 	 * 跳转到更新页面，回显数据
+	 * 
 	 * editpage.jsp
 	 * @param id
 	 * @param model 使用的Model保存回显数据
