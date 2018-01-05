@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd ">
+	
+	<context:component-scan base-package="zw">
+		<context:exclude-filter type="annotation" 
+		expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+		
+	<!-- 开启事务注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager"  />
+	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<!-- 小网数据库 -->
+		 
+		<property name="jdbcUrl"
+			value="jdbc:sqlserver://10.63.70.164:1433;databaseName=hnyxnew">
+		</property>
+		<property name="user" value="sa"></property>
+		<property name="password" value="hncatv123"></property>
+		<property name="initialPoolSize" value="3" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="20" />
+		<property name="maxIdleTime" value="120" />
+		<property name="acquireIncrement" value="2" />
+		<property name="idleConnectionTestPeriod" value="60" />
+		
+	</bean>
+		
+	<!-- 备份服务器数据库 -->
+	<!-- 
+	<property name="jdbcUrl"
+			value="jdbc:sqlserver://172.30.96.162:1433;databaseName=hnyx">
+		</property>
+		<property name="user" value="DSMH"></property>
+		<property name="password" value="h7y5g8u6p9"></property>
+		<property name="initialPoolSize" value="3" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="20" />
+		<property name="maxIdleTime" value="120" />
+		<property name="acquireIncrement" value="2" />
+		<property name="idleConnectionTestPeriod" value="60" />
+	</bean>
+	 -->
+	 
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+                <prop key="hibernate.format_sql">true </prop>
+                <!-- 
+			                它包含4个属性: 
+			    * create : 会根据你的model类来生成表,但是每次运行都会删除上一次的表,重新生成表,哪怕2次没有任何改变 
+			    * create-drop : 根据model类生成表,但是sessionFactory一关闭,表就自动删除 
+			    * update : 最常用的属性，也根据model类生成表,即使表结构改变了,表中的行仍然存在,不会删除以前的行 
+			    * validate : 只会和数据库中的表进行比较,不会创建新表,但是会插入新值 
+                 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>zw.model.WiredVideo</value></list>
+		</property></bean>
+	
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager" /></beans>
