@@ -9,58 +9,36 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd ">
 	
+	<!-- 剔除controller的注解，控制器注解由springmvc管理 -->
 	<context:component-scan base-package="zw">
 		<context:exclude-filter type="annotation" 
 		expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-		
-	<!-- 开启事务注解 -->
-	<tx:annotation-driven transaction-manager="transactionManager"  />
 	
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close">
-		<!-- 小网数据库 -->
-		 
-		<property name="jdbcUrl"
-			value="jdbc:sqlserver://10.63.70.164:1433;databaseName=hnyxnew">
-		</property>
-		<property name="user" value="sa"></property>
-		<property name="password" value="hncatv123"></property>
-		<property name="initialPoolSize" value="3" />
-		<property name="minPoolSize" value="5" />
-		<property name="maxPoolSize" value="20" />
-		<property name="maxIdleTime" value="120" />
-		<property name="acquireIncrement" value="2" />
-		<property name="idleConnectionTestPeriod" value="60" />
-		
+	<!-- 引入外部的属性文件 -->
+	<context:property-placeholder location="classpath:/resources/jdbc.properties"/>
+	
+	<!-- 配置c3p0 连接池  注意此处driverClass为com.microsoft.sqlserver.jdbc.SQLServerDriver  -->	
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClass}"/>        
+        <property name="jdbcUrl" value="${jdbc.url}"/>        
+        <property name="user" value="${jdbc.username}"/>        
+        <property name="password" value="${jdbc.password}"/>  
 	</bean>
-		
-	<!-- 备份服务器数据库 -->
-	<!-- 
-	<property name="jdbcUrl"
-			value="jdbc:sqlserver://172.30.96.162:1433;databaseName=hnyx">
-		</property>
-		<property name="user" value="DSMH"></property>
-		<property name="password" value="h7y5g8u6p9"></property>
-		<property name="initialPoolSize" value="3" />
-		<property name="minPoolSize" value="5" />
-		<property name="maxPoolSize" value="20" />
-		<property name="maxIdleTime" value="120" />
-		<property name="acquireIncrement" value="2" />
-		<property name="idleConnectionTestPeriod" value="60" />
-	</bean>
-	 -->
-	 
+	
+	<!-- 配置hibernate 相关属性-->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<!-- 注入连接池-->
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
+		<!-- hibernate 的相关属性 -->
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
-                <prop key="hibernate.format_sql">true </prop>
+                <prop key="hibernate.format_sql">false </prop>
                 <!-- 
 			                它包含4个属性: 
 			    * create : 会根据你的model类来生成表,但是每次运行都会删除上一次的表,重新生成表,哪怕2次没有任何改变 
@@ -71,13 +49,15 @@
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
+		<!-- hibernate 注解类文件 -->
 		<property name="annotatedClasses">
 			<list>
 				<value>zw.model.WiredVideo</value>
 				<value>zw.model.SiteserverPublishmentSystem</value>
 				<value>zw.model.WiredEnterpriseUser</value>
 				<value>zw.model.WiredTvn</value></list>
-		</property></bean>
+		</property>
+	</bean>
 	
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
@@ -85,4 +65,7 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
-	<tx:annotation-driven transaction-manager="transactionManager" /></beans>
+	<!-- 开启事务注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager"  />
+	
+</beans>
