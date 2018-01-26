@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * WiredTvn entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "wired_TVN", schema = "dbo", catalog = "hnyxnew")
+@Table(name = "wired_TVN", schema = "dbo", catalog = "hnyx")
 public class WiredTvn implements java.io.Serializable {
 
     // Fields

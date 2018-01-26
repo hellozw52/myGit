@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * SiteserverPublishmentSystem entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "siteserver_PublishmentSystem", schema = "dbo", catalog = "hnyxnew")
+@Table(name = "siteserver_PublishmentSystem", schema = "dbo", catalog = "hnyx")
 public class SiteserverPublishmentSystem implements java.io.Serializable {
 
     // Fields

@@ -20,7 +20,7 @@ public class VideoDao {
     
     private Session getSession() {
 	return sessionFactory.getCurrentSession();
-}
+    }
 
     public WiredVideo getVideoInfoById(int i) {
 	// TODO Auto-generated method stub

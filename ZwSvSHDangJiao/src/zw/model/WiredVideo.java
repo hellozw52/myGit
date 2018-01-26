@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="wired_Video"
     ,schema="dbo"
-    ,catalog="hnyxnew"
+    ,catalog="hnyx"
 )
 
 public class WiredVideo  implements java.io.Serializable {
