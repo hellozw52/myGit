@@ -35,15 +35,19 @@ public class VideoController {
 	Map<String, Object> map = new HashMap<String, Object>();
 	//如果id为空  返回异常信息
 	if(StringUtils.isEmpty(id)){
-	  map.put("error", "id param is null or empty!");
+	  map.put("Result", "query failed");
+	  map.put("Cause", "id param is null or empty!");
 	}else{
 	  //将字符串转成整形
 	  WiredVideo wiredVideo = videoService.getVideoInfoById(Integer.parseInt(id));
 	  //如果没有查到结果
 	  if(wiredVideo==null){
-	      map.put("error", "no data found!");
+	      map.put("Result", "query failed");
+	      map.put("Cause", "no data found");
 	  }else{
 	      //正常查到的结果
+	      map.put("Result", "query success");
+	      map.put("VideoId", id);
 	      map.put("DataArea", wiredVideo);
 	  }
 	}
@@ -57,6 +61,7 @@ public class VideoController {
 	
 	List<WiredVideo> videolist = videoService.getAllVideoInfo();
 	Map<String, Object> map = new HashMap<String, Object>();
+	map.put("Result", "query success");
 	map.put("DataArea", videolist);
 	map.put("TotalNum", videoService.getTotalNum());
 	return map;

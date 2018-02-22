@@ -37,7 +37,8 @@ public class NavigatorController {
 	
 	// 如果tvn为空 返回异常信息
 	if (StringUtils.isEmpty(tvn)) {
-	    map.put("error", "param is null or empty!");
+	    map.put("Result", "query failed");
+	    map.put("Cause", "param is null or empty");
 	} else
 	// 如果tvn号在数据表中存在
 	if (navigatorService.isTvnExist(tvn)) {
@@ -45,13 +46,14 @@ public class NavigatorController {
 	    String sitename = navigatorService.getCurrentTvnSiteName(tvn);
 	    // 获取站点url地址
 	    String siteurl = getSiteUrl(sitename);
-	    map.put("result", "ok");
-	    map.put("tvn", tvn);
-	    map.put("siteurl", siteurl);
+	    map.put("Result", "query success");
+	    map.put("Tvn", tvn);
+	    map.put("SiteUrl", siteurl);
 	} else 
 	    // tvn不在数据表中
 	    if(!navigatorService.isTvnExist(tvn)){
-	    map.put("error", "tvn not in DataBase!");
+	    map.put("Result", "query failed");
+	    map.put("Cause", "tvn not in DataBase");
 	}
 	
 	//返回json
