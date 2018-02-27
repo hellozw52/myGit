@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
+
 import zw.dao.VideoDao;
 import zw.model.WiredVideo;
 
@@ -46,6 +47,11 @@ public class VideoService {
     public int getTotalNum() {
 	// TODO Auto-generated method stub
 	return videoDao.getTotalNum();
+    }
+
+    public List<WiredVideo> getCurrentPageVideoList(String page, String rows) {
+	// TODO Auto-generated method stub
+	return videoDao.getCurrentPageVideoList(page,rows);
     }
 
 }

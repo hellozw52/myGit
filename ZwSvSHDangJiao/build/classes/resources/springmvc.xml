@@ -16,6 +16,12 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
 	</context:component-scan>
 	
+	<!-- 定义跳转的文件的前后缀 ，视图模式配置-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/admin/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+	
 	<!-- 配置返回的json格式 -->
 	<bean  
        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
@@ -25,7 +31,7 @@
            </list>  
        </property>  
    	</bean>  
-	
+   	
 	<!--  静态资源交给默认的Servlet-->
 	<mvc:default-servlet-handler/>
 	
