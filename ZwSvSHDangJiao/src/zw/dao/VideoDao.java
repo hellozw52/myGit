@@ -42,7 +42,7 @@ public class VideoDao {
 	// 当为缺省值的时候进行赋值
 	int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
 		: page);// 第几页
-	int pagesize = Integer.parseInt((rows == null || rows == "0") ? "10"
+	int pagesize = Integer.parseInt((rows == null || rows == "0") ? "15"
 		: rows);// 每页多少行
 
 	List<WiredVideo> list = this.getSession()

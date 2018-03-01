@@ -16,11 +16,15 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
 	</context:component-scan>
 	
-	<!-- 定义跳转的文件的前后缀 ，视图模式配置-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/admin/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
+	<!--  静态资源交给默认的Servlet-->
+	<mvc:default-servlet-handler/>
+	
+	<!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置
+	mvc:annotation-driven默认加载很多的参数绑定方法，
+	比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter
+	实际开发时使用mvc:annotation-driven
+	 -->
+	<mvc:annotation-driven/>
 	
 	<!-- 配置返回的json格式 -->
 	<bean  
@@ -30,15 +34,13 @@
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>  
            </list>  
        </property>  
-   	</bean>  
-   	 
-	<!--  静态资源交给默认的Servlet-->
-	<mvc:default-servlet-handler/>
+   	</bean> 
 	
-	<!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置
-	mvc:annotation-driven默认加载很多的参数绑定方法，
-	比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter
-	实际开发时使用mvc:annotation-driven
-	 -->
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<!-- 定义跳转的文件的前后缀 ，视图模式配置, InternalResourceViewResolver 配置到最后 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+    	<property name="prefix" value="/admin/" />
+    	<property name="suffix" value=".jsp" />
+	</bean>
+    
 </beans>

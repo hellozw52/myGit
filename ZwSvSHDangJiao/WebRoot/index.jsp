@@ -26,10 +26,10 @@
 	</noscript>
 	<div data-options="region:'north',border:false"
 		style="height:60px;background:#fff;padding:0px">
-		<div class="site_title">通用后台管理系统</div>
+		<div class="site_title">电视门户视频管理系统</div>
 		<div id="sessionInfoDiv"
 			style="position: absolute;right: 5px;top:10px;">
-			[<strong>Hunter</strong>]，欢迎你！您使用[<strong>127.0.0.1</strong>]IP登录！
+			[<strong>DSMH ADMIN</strong>]，欢迎你！您使用[<strong>xxx.xxx.xxx.xxx</strong>]IP登录！
 		</div>
 		<div style="position: absolute; right: 0px; bottom: 0px; ">
 			<a href="javascript:void(0);" class="easyui-menubutton"
@@ -67,7 +67,7 @@
 			data-options="fit:true,border:false">
 			<!--//左侧菜单导航-->
 			<!--waiceng-->
-			<div title="用户中心" data-options="iconCls:'icon-mini-add'"
+			<div title="后台管理" data-options="iconCls:'icon-mini-add'"
 				style="padding:10px;">
 				<ul class="easyui-tree" data-options="animate:true">
 					<li data-options="state:'closed'"><span>注入视频管理</span>
