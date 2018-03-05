@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
+
 import zw.dao.VideoDao;
 import zw.model.WiredVideo;
 
@@ -53,5 +54,11 @@ public class VideoService {
 	// TODO Auto-generated method stub
 	return videoDao.getCurrentPageVideoList(page,rows);
     }
+
+//    public WiredVideo getVideoInfoByManyParam(int parseInt, int parseInt2,
+//	    String assetName) {
+//	// TODO Auto-generated method stub
+//	return null;
+//    }
 
 }
