@@ -14,7 +14,7 @@ import zw.service.NavigatorService;
 
 /**
  * 导航的功能 根据双向优先机顶盒tvn号 重定向至站点页面
- * 
+ * 针对前端页面开发的接口：电视门户系统小导航
  * @author zhaowei
  */
 @Controller
@@ -26,7 +26,12 @@ public class NavigatorController {
     @Autowired
     public NavigatorService navigatorService;
 
-    // 根据tvn获取站点url路径 json格式
+    /**
+     * 根据tvn获取站点url路径 json格式
+     *  ./getSiteUrlByTvn?tvn=xxx
+     * @param tvn
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getSiteUrlByTvn")
     public Map<String, Object> getSiteUrlByTvn(@RequestParam("tvn") String tvn) {

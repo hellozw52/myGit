@@ -21,7 +21,13 @@ import zw.model.WiredVideo;
 @RequestMapping("/videolist")
 public class VideoListController extends BaseController {
 
-    // 接收前端传递的数据page，rows 获取当前页数据 返回json数据
+    /**
+     * 接收前端传递的数据page，rows 获取当前页数据 返回json数据
+     *  ./getVideoInfoList?page=xxx&rows=xxx
+     * @param page
+     * @param rows
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getVideoInfoList")
     public Map<String, Object> getVideoInfoList(
@@ -39,8 +45,12 @@ public class VideoListController extends BaseController {
 	return data;
     }
 
-    // 接收前端传递的数据videoId参数 获取信息记录
-    // ./getVideoInfoByManyParam?videoId=xxx
+    /**
+     * 接收前端传递的数据videoId参数 获取信息记录
+     * ./getVideoInfoByManyParam?videoId=xxx
+     * @param videoId
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getVideoInfoByVideoId")
     public Map<String, Object> getVideoInfoByVideoId(
@@ -67,7 +77,10 @@ public class VideoListController extends BaseController {
 	return data;
     }
 
-    // 跳转至video.jsp页面
+    /**
+     * 跳转至video.jsp页面
+     * @return
+     */
     @RequestMapping("/goToVideoTab")
     public String goToVideoTab() {
 	return "video";

@@ -17,7 +17,7 @@ public class BaseController {
     // 供easyui前端页面显示操作结果
     protected String result = null;
 
-    // service对象
+    // 待注入的service对象
     @Resource
     protected VideoService videoService;
 

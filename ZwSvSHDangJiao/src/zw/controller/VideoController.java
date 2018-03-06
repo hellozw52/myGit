@@ -17,6 +17,7 @@ import zw.service.VideoService;
 
 /**
  * 关于注入视频的功能
+ * 针对前端开发的接口：电视门户系统视频信息查询
  * @author zhaowei
  */
 @Controller    //使用该注解标志它是一个控制器
@@ -27,7 +28,12 @@ public class VideoController {
     @Autowired
     public VideoService videoService;
     
-    //根据id查询注入视频的数据  json格式
+    /**
+     * 根据id查询注入视频的数据  json格式
+     * 	./getVideoInfoById?id=xxx
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getVideoInfoById")
     public Map<String, Object> getVideoInfoById(@RequestParam("id") String id) {
@@ -54,7 +60,10 @@ public class VideoController {
 	return map;
     }
     
-    //查询所有视频记录
+    /**
+     * 查询所有视频记录
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/getAllVideoInfo")
     public Map<String, Object> getAllVideoInfo() {
