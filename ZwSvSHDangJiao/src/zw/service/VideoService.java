@@ -55,10 +55,4 @@ public class VideoService {
 	return videoDao.getCurrentPageVideoList(page,rows);
     }
 
-//    public WiredVideo getVideoInfoByManyParam(int parseInt, int parseInt2,
-//	    String assetName) {
-//	// TODO Auto-generated method stub
-//	return null;
-//    }
-
 }

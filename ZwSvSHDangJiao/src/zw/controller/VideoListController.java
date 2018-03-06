@@ -40,6 +40,7 @@ public class VideoListController extends BaseController {
     }
 
     // 接收前端传递的数据videoId参数 获取信息记录
+    // ./getVideoInfoByManyParam?videoId=xxx
     @ResponseBody
     @RequestMapping("/getVideoInfoByVideoId")
     public Map<String, Object> getVideoInfoByVideoId(
@@ -65,46 +66,6 @@ public class VideoListController extends BaseController {
 	// 返回json数据
 	return data;
     }
-
-    // ./getVideoInfoByManyParam?videoId=xxx&assetId=xxx&assetName=xxx  多参数查询功能暂未完成！
-    /**
-     * @param videoId
-     * @param assetId
-     * @param assetName
-     * @param page
-     * @param rows
-     * @return
-     */
-//    @ResponseBody
-//    @RequestMapping("/getVideoInfoByManyParam")
-//    public Map<String, Object> getVideoInfoByManyParam(
-//	    @RequestParam("videoId") String videoId,
-//	    @RequestParam("assetId") String assetId,
-//	    @RequestParam("assetName") String assetName,
-//
-//	    @RequestParam("page") String page, @RequestParam("rows") String rows) {
-//
-//	// 创建一个数组
-//	List<WiredVideo> videolist = new ArrayList<>();
-//	// 计数
-//	int videocount;
-//	// 显示查询的结果 将string转为int类型
-//	WiredVideo wiredvideo = videoService
-//		.getVideoInfoByManyParam(Integer.parseInt(videoId),
-//			Integer.parseInt(assetId), assetName);
-//	// 将结果数据添加至数组
-//	videolist.add(wiredvideo);
-//	// 获取结果总数
-//	videocount = videolist.size();
-//
-//	// 实例化data 存放数据， 注意！rows中存放的是数组！！！
-//	data = new HashMap<String, Object>();
-//	data.put("rows", videolist);
-//	data.put("total", videocount);
-//
-//	// 返回json数据
-//	return data;
-//    }
 
     // 跳转至video.jsp页面
     @RequestMapping("/goToVideoTab")
