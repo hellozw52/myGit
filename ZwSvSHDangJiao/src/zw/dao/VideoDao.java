@@ -19,11 +19,46 @@ public class VideoDao {
 	return sessionFactory.getCurrentSession();
     }
 
-    public WiredVideo getVideoInfoById(int i) {
+    /**
+     * 根据id进行模糊查询！
+     * @param id
+     * @return
+     */
+    public List<WiredVideo> getVideoInfoById(int id) {
 	// TODO Auto-generated method stub
-	return (WiredVideo) this.getSession()
-		.createQuery("from WiredVideo where videoId=?")
-		.setParameter(0, i).uniqueResult();
+	return (List<WiredVideo>) this.getSession()
+		.createQuery("from WiredVideo w where w.videoId like '%"+id+"%'")
+		.list();
+    }
+    
+    /**
+     * 根据多个参数进行模糊查询！
+     *   SELECT * FROM wired_Video w WHERE w.VideoId like '%123%' AND w.AssetId LIKE '%VODC%' AND w.AssetName LIKE '%国%' 
+     * @param videoId
+     * @param assetId
+     * @param assetName
+     * @return
+     */
+    public List<WiredVideo> getVideoInfoManyPara(int videoId,String assetId,String assetName) {
+	// TODO Auto-generated method stub
+	return (List<WiredVideo>) this.getSession()
+		.createQuery("from WiredVideo w where w.videoId like '%"+videoId+"%' and w.assetId like '%"+assetId+"%' and w.assetName like '%"+assetName+"%'" )
+		.list();
+    }
+    
+    /**
+     * 根据两个参数进行查询
+     * SELECT * FROM wired_Video w WHERE w.AssetId LIKE '%VODC%' AND w.AssetName LIKE '%国%'
+     * @param assetId
+     * @param assetName
+     * @return
+     */
+    public List<WiredVideo> getVideoInfoManyPara(String assetId,
+	    String assetName) {
+	// TODO Auto-generated method stub
+	return (List<WiredVideo>) this.getSession()
+		.createQuery("from WiredVideo w where w.assetId like '%"+assetId+"%' and w.assetName like '%"+assetName+"%'" )
+		.list();
     }
 
     public List<WiredVideo> getAllVideoInfo() {
@@ -52,5 +87,4 @@ public class VideoDao {
 
 	return list;
     }
-
 }

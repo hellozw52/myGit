@@ -5,18 +5,18 @@
 
 		/* 获取参数值 */
 		var videoId = $('#videoId').val();
-		/* var assetId = $('#assetId').val();
-		var assetName = $('#assetName').val(); */
+		var assetId = $('#assetId').val();
+		var assetName = $('#assetName').val();
 
-		/* 参数不为空，查询结果 */
-		if (videoId) {
-			$('#dg_video').datagrid('options').url = './videolist/getVideoInfoByVideoId';
+		/* 三个参数只要有一个不为空，就查询结果 */
+		if (videoId||assetId||assetName) {
+			$('#dg_video').datagrid('options').url = './videolist/getVideoInfoManyPara';
 			$('#dg_video').datagrid('load', {
-				videoId : videoId
-				/* assetId : assetId,
-				assetName : assetName */
+				videoId : videoId,
+				assetId : assetId,
+				assetName : assetName
 			});
-			/* 参数为空，默认查询第1页结果 */
+			/* 所有参数均为空，默认查询第1页结果 */
 		} else {
 			$('#dg_video').datagrid('options').url = './videolist/getVideoInfoList';
 			$('#dg_video').datagrid('load');
@@ -31,10 +31,13 @@
 			style="line-height:26px;border:1px solid #ccc"
 			onkeypress="if(event.keyCode==13) {btn_search.click();return false;}">
 			
-		<!-- <span>assetId:</span> <input id="assetId"
-			style="line-height:26px;border:1px solid #ccc" onkeypress="if(event.keyCode==13) {btn_search.click();return false;}">	
+		<span>assetId:</span> <input id="assetId"
+			style="line-height:26px;border:1px solid #ccc" 
+			onkeypress="if(event.keyCode==13) {btn_search.click();return false;}">
+			
 		<span>assetName:</span> <input id="assetName"
-			style="line-height:26px;border:1px solid #ccc" onkeypress="if(event.keyCode==13) {btn_search.click();return false;}"> -->
+			style="line-height:26px;border:1px solid #ccc" 
+			onkeypress="if(event.keyCode==13) {btn_search.click();return false;}">
 		
 		<a href="#" id="btn_search" class="easyui-linkbutton"
 			iconCls="icon-search" plain="true" onclick="doSearch()">Search</a>
@@ -47,8 +50,8 @@
 	<thead>
 		<tr>
 			<th data-options="field:'videoId',width:200">videoId</th>
-			<th data-options="field:'assetName',width:200">assetName</th>
 			<th data-options="field:'assetId',width:200">assetId</th>
+			<th data-options="field:'assetName',width:200">assetName</th>
 			<th data-options="field:'providerName',width:200">providerName</th>
 			<th data-options="field:'providerCode',width:200">providerCode</th>
 		</tr>

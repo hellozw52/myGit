@@ -31,7 +31,8 @@ public class VideoListController extends BaseController {
     @ResponseBody
     @RequestMapping("/getVideoInfoList")
     public Map<String, Object> getVideoInfoList(
-	    @RequestParam("page") String page, @RequestParam("rows") String rows) {
+	    @RequestParam("page") String page, 
+	    @RequestParam("rows") String rows) {
 
 	List<WiredVideo> videolist = videoService.getCurrentPageVideoList(page,
 		rows);// 获取某页数据
@@ -44,27 +45,55 @@ public class VideoListController extends BaseController {
 	// 返回json数据
 	return data;
     }
-
+    
     /**
-     * 接收前端传递的数据videoId参数 获取信息记录
-     * ./getVideoInfoByManyParam?videoId=xxx
+     * 接收前端传递的数据多个参数  获取信息记录
+     * ./getVideoInfoManyPara?videoId=xxx&assetId=xxx&assetName=xxx
      * @param videoId
+     * @param assetId
+     * @param assetName
      * @return
      */
     @ResponseBody
-    @RequestMapping("/getVideoInfoByVideoId")
-    public Map<String, Object> getVideoInfoByVideoId(
-	    @RequestParam("videoId") String videoId) {
+    @RequestMapping("/getVideoInfoManyPara")
+    public Map<String, Object> getVideoInfoManyPara(
+	    @RequestParam("videoId") String videoId,
+	    @RequestParam("assetId") String assetId,
+	    @RequestParam("assetName") String assetName,
+	    
+	    @RequestParam("page") String page, 
+	    @RequestParam("rows") String rows
+	    ) {
 
-	// 创建一个数组
-	List<WiredVideo> videolist = new ArrayList<>();
 	// 计数
 	int videocount;
-	// 显示查询的结果 将string转为int类型
-	WiredVideo wiredvideo = videoService.getVideoInfoById(Integer
-		.parseInt(videoId));
-	// 将结果数据添加至数组
-	videolist.add(wiredvideo);
+	
+	// 存放查询结果
+	List<WiredVideo> videolist = new ArrayList<>();
+	
+	// 参数只要有一个不为空
+	if(!videoId.isEmpty()||!assetId.isEmpty()||!assetName.isEmpty()){
+	    
+	    // 如果videoId为空
+	    if(videoId.isEmpty()){
+		
+		// 不传videoId参数进行查询
+		videolist = videoService.getVideoInfoManyPara(
+			assetId,
+			assetName);
+	    }else{
+		// 如果videoId不为空，传递所有参数进行查询
+		videolist = videoService.getVideoInfoManyPara(
+			Integer.parseInt(videoId),
+			assetId,
+			assetName);
+	    }
+	    
+	}else{
+	    // 所有参数均为空时，显示默认查询结果
+	    videolist = videoService.getCurrentPageVideoList(page,
+			rows);
+	}
 	// 获取结果总数
 	videocount = videolist.size();
 

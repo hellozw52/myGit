@@ -45,16 +45,16 @@ public class VideoController {
 	  map.put("Cause", "id param is null or empty!");
 	}else{
 	  //将字符串转成整形
-	  WiredVideo wiredVideo = videoService.getVideoInfoById(Integer.parseInt(id));
+	  List<WiredVideo> videolist = videoService.getVideoInfoManyPara(Integer.parseInt(id),"","");
 	  //如果没有查到结果
-	  if(wiredVideo==null){
+	  if(videolist==null){
 	      map.put("Result", "query failed");
 	      map.put("Cause", "no data found");
 	  }else{
 	      //正常查到的结果
 	      map.put("Result", "query success");
 	      map.put("VideoId", id);
-	      map.put("DataArea", wiredVideo);
+	      map.put("DataArea", videolist);
 	  }
 	}
 	return map;

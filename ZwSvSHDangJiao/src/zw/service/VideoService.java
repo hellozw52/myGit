@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
+
 import zw.dao.VideoDao;
 import zw.model.WiredVideo;
 
@@ -23,18 +24,32 @@ public class VideoService {
     public VideoDao videoDao;
 
     /**
-     * 根据id查询视频信息
-     * @param i
-     * @return WiredVideo
+     * 根据多个参数查询结果
+     * @param videoId
+     * @param assetId
+     * @param assetName
+     * @return List<WiredVideo>
      */
-    public WiredVideo getVideoInfoById(int i) {
+    public List<WiredVideo> getVideoInfoManyPara(int videoId,String assetId,String assetName) {
 	// TODO Auto-generated method stub
-	return videoDao.getVideoInfoById(i);
+	return videoDao.getVideoInfoManyPara(videoId,assetId,assetName);
+    }
+    
+    /**
+     * 根据两个参数查询结果
+     * @param assetId
+     * @param assetName
+     * @return
+     */
+    public List<WiredVideo> getVideoInfoManyPara(String assetId,
+	    String assetName) {
+	// TODO Auto-generated method stub
+	return videoDao.getVideoInfoManyPara(assetId,assetName);
     }
 
     /**
      * 获取所有视频信息
-     * @return List<WiredVideo>
+     * @return 
      */
     public List<WiredVideo> getAllVideoInfo() {
 	// TODO Auto-generated method stub
