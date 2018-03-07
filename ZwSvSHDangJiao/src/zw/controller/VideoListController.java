@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import zw.model.WiredVideo;
 
 /**
- * VideoList
- * @author zhaowei 此controller用于easyui交互，供界面展示数据
+ * 与前端easyui进行交互
+ * @author zhaowei 
  */
-// 使用该注解标志它是一个控制器
 @Controller
 @RequestMapping("/videolist")
 public class VideoListController extends BaseController {
@@ -47,12 +46,14 @@ public class VideoListController extends BaseController {
     }
     
     /**
-     * 接收前端传递的数据多个参数  获取信息记录
-     * ./getVideoInfoManyPara?videoId=xxx&assetId=xxx&assetName=xxx
-     * @param videoId
-     * @param assetId
-     * @param assetName
-     * @return
+     * 接收前端传递的数据多个参数，查询视频信息
+     * ./getVideoInfoManyPara?videoId=xxx&assetId=xxx&assetName=xxx&page=xxx&rows=xxx
+     * @param videoId 查询字段
+     * @param assetId 查询字段
+     * @param assetName 查询字段
+     * @param page 用于easyui分页
+     * @param rows 用于easyui分页
+     * @return json数据
      */
     @ResponseBody
     @RequestMapping("/getVideoInfoManyPara")
@@ -60,15 +61,14 @@ public class VideoListController extends BaseController {
 	    @RequestParam("videoId") String videoId,
 	    @RequestParam("assetId") String assetId,
 	    @RequestParam("assetName") String assetName,
-	    
 	    @RequestParam("page") String page, 
 	    @RequestParam("rows") String rows
 	    ) {
 
-	// 计数
+	// 对查询结果计数
 	int videocount;
 	
-	// 存放查询结果
+	// 存放查询结果的数组
 	List<WiredVideo> videolist = new ArrayList<>();
 	
 	// 参数只要有一个不为空
@@ -77,25 +77,20 @@ public class VideoListController extends BaseController {
 	    // 如果videoId为空
 	    if(videoId.isEmpty()){
 		
-		// 不传videoId参数进行查询
-		videolist = videoService.getVideoInfoManyPara(
-			assetId,
-			assetName);
+		// 根据两个参数进行查询,分页,获取结果数。其中page，rows参数用于分页
+		videolist = videoService.getVideoInfoManyPara(assetId,assetName,page,rows);
+		videocount = videoService.getVideoInfoManyParaTotalNum(assetId,assetName);
 	    }else{
-		// 如果videoId不为空，传递所有参数进行查询
-		videolist = videoService.getVideoInfoManyPara(
-			Integer.parseInt(videoId),
-			assetId,
-			assetName);
+		// 根据三个参数进行查询,分页,获取结果数。其中page，rows参数用于分页
+		videolist = videoService.getVideoInfoManyPara(Integer.parseInt(videoId),assetId,assetName,page,rows);
+		videocount = videoService.getVideoInfoManyParaTotalNum(Integer.parseInt(videoId),assetId,assetName);
 	    }
 	    
 	}else{
-	    // 所有参数均为空时，显示默认查询结果
-	    videolist = videoService.getCurrentPageVideoList(page,
-			rows);
+	    // 所有参数均为空时，显示默认查询结果,分页,获取结果数
+	    videolist = videoService.getCurrentPageVideoList(page,rows);
+	    videocount = videoService.getTotalNum();
 	}
-	// 获取结果总数
-	videocount = videolist.size();
 
 	// 实例化data 存放数据， 注意！rows中存放的是数组！！！
 	data = new HashMap<String, Object>();
