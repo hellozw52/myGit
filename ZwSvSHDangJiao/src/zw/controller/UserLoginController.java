@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes(value = "username")
 @Controller
 @RequestMapping("/userlogin")
-public class LoginUserController {
+public class UserLoginController {
     
     @RequestMapping("/login")
     public String dologin(
