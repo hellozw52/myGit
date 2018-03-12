@@ -10,7 +10,7 @@
 
 		/* 三个参数只要有一个不为空，就查询结果 */
 		if (videoId||assetId||assetName) {
-			$('#dg_video').datagrid('options').url = './videolist/getVideoInfoManyPara';
+			$('#dg_video').datagrid('options').url = '../videolist/getVideoInfoManyPara';
 			$('#dg_video').datagrid('load', {
 				videoId : videoId,
 				assetId : assetId,
@@ -18,7 +18,7 @@
 			});
 			/* 所有参数均为空，默认查询第1页结果 */
 		} else {
-			$('#dg_video').datagrid('options').url = './videolist/getVideoInfoList';
+			$('#dg_video').datagrid('options').url = '../videolist/getVideoInfoList';
 			$('#dg_video').datagrid('load');
 		}
 	}
@@ -44,9 +44,9 @@
 	</div>
 </div>
 
-<table id="dg_video" title="视频查询" class="easyui-datagrid"
+<table id="dg_video" title="" class="easyui-datagrid"
 	style="overflow:auto;"
-	data-options="toolbar:'#toolbar_shop',pagination:true,singleSelect:true,collapsible:true,url:'./videolist/getVideoInfoList',pageSize:15,pageList:[ 5, 10, 15, 20 ]">
+	data-options="toolbar:'#toolbar_shop',pagination:true,singleSelect:true,collapsible:true,url:'../videolist/getVideoInfoList',pageSize:15,pageList:[ 5, 10, 15, 20 ]">
 	<thead>
 		<tr>
 			<th data-options="field:'videoId',width:200">videoId</th>

@@ -1,116 +1,67 @@
-<%@ page language="java" pageEncoding="utf-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<title>通用后台管理系统</title>
-<link id="easyuiTheme" rel="stylesheet"
-	href="admin/easyui/themes/gray/easyui.css" type="text/css"></link>
-<link rel="stylesheet" type="text/css" href="admin/easyui/themes/icon.css">
-<link rel="stylesheet" type="text/css" href="admin/css/portal.css">
-<link rel="stylesheet" type="text/css" href="admin/css/common.css">
-<script type="text/javascript" src="admin/js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="admin/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="admin/js/jquery.portal.js"></script>
-<script type="text/javascript" src="admin/js/jquery.cookie.js"></script>
-<script type="text/javascript" src="admin/js/jeasyui.common.js"></script>
-<script type="text/javascript" src="admin/easyui/locale/easyui-lang-zh_CN.js"
-	charset="utf-8"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>登陆</title>
+<link type="text/css" rel="stylesheet" href="css/reset.css">
+<link type="text/css" rel="stylesheet" href="css/main.css">
 </head>
-<body class="easyui-layout">
-	<noscript>
-		<div
-			style="position:absolute; z-index:100000; height:246px;top:0px;left:0px; width:100%; background:white; text-align:center;">
-			<img src="admin/images/noscript.gif" alt='抱歉，请开启脚本支持！' />
-		</div>
-	</noscript>
-	<div data-options="region:'north',border:false"
-		style="height:60px;background:#fff;padding:0px">
-		<div class="site_title">电视门户视频管理系统</div>
-		<div id="sessionInfoDiv"
-			style="position: absolute;right: 5px;top:10px;">
-			[<strong>DSMH ADMIN</strong>]，欢迎你！您使用[<strong>xxx.xxx.xxx.xxx</strong>]IP登录！
-		</div>
-		<div style="position: absolute; right: 0px; bottom: 0px; ">
-			<a href="javascript:void(0);" class="easyui-menubutton"
-				data-options="menu:'#layout_north_pfMenu',iconCls:'icon-ok'">更换皮肤</a>
-			<a href="javascript:void(0);" class="easyui-menubutton"
-				data-options="menu:'#layout_north_kzmbMenu',iconCls:'icon-help'">控制面板</a>
-			<a href="javascript:void(0);" class="easyui-menubutton"
-				data-options="menu:'#layout_north_zxMenu',iconCls:'icon-back'">注销</a>
-		</div>
-		<div id="layout_north_pfMenu" style="width: 120px; display: none;">
-			<div onclick="changeTheme('default');">default</div>
-			<div onclick="changeTheme('gray');">gray</div>
-			<div onclick="changeTheme('metro');">metro</div>
-			<div onclick="changeTheme('cupertino');">cupertino</div>
-			<div onclick="changeTheme('dark-hive');">dark-hive</div>
-			<div onclick="changeTheme('pepper-grinder');">pepper-grinder</div>
-			<div onclick="changeTheme('sunny');">sunny</div>
-		</div>
-		<div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
-			<div onclick="userInfoFun();">个人信息</div>
-			<div onclick="userInfoFun();">退出登录</div>
-		</div>
-		<div id="layout_north_zxMenu" style="width: 100px; display: none;">
-			<div onclick="logoutFun();">锁定窗口</div>
-			<div class="menu-sep"></div>
-			<div onclick="logoutFun();">重新登录</div>
-			<div onclick="logoutFun(true);">退出系统</div>
-		</div>
 
-
-	</div>
-	<div data-options="region:'west',split:true,title:'导航菜单'"
-		style="width:200px;">
-		<div class="easyui-accordion sider"
-			data-options="fit:true,border:false">
-			<!--//左侧菜单导航-->
-			<!--waiceng-->
-			<div title="后台管理" data-options="iconCls:'icon-mini-add'"
-				style="padding:10px;">
-				<ul class="easyui-tree" data-options="animate:true">
-					<li data-options="state:'closed'"><span>注入视频管理</span>
-						<ul>
-							<li><a href="javascript:viod(0);" cmshref="./videolist/goToVideoTab"
-								type="member_perinfo" rel="">视频列表</a></li>
-						</ul></li>
+<body>
+<!-- <div class="headerBar">
+	<div class="logoBar login_logo">
+		<div class="comWidth">
+			<div class="logo fl">
+				<a href="#"><img src="images/logo.jpg" alt="慕课网"></a>
 			</div>
-			<!--waiceng-->
-			<!--
-			<div title="商家中心" data-options="iconCls:'icon-mini-add'"
-				style="padding:10px;">
-				<ul class="easyui-tree" data-options="animate:true">
-					<li data-options="state:'closed'"><span>商家管理</span>
-						<ul>
-							<li><a href="javascript:viod(0);" cmshref="shop/shop.action"
-								type="member_perinfo" rel="">商家管理</a></li>
-							<li><a href="javascript:viod(0);"
-								cmshref="shop/shopCategory.action" type="member_perinfo" rel="">类别管理</a></li>
-						</ul></li>
-			</div>
-			-->
-			<!--//左侧菜单导航-->
+			<h3 class="welcome_title">欢迎登陆</h3>
 		</div>
-		<!--accordion-->
+	</div>
+</div> -->
 
+<form action="userlogin/login" method="post" >
+<div class="loginBox">	
+
+	<div class="login_cont">
+		<ul class="login">
+			<li class="l_tit">用户名</li>
+			<li class="mb_10"><input type="text" name="username" class="login_input user_icon"></li>
+			<li class="l_tit">密码</li>
+			<li class="mb_10"><input type="password" name="password" class="login_input user_icon"></li>
+			
+			<li><input type="submit" value="" class="login_btn"></li>
+		</ul>
+		
+		
+		<!-- <div class="login_partners">
+			<p class="l_tit">使用合作方账号登陆网站</p>
+			<ul class="login_list clearfix">
+				<li><a href="#">QQ</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">网易</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">新浪微博</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">腾讯微薄</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">新浪微博</a></li>
+				<li><span>|</span></li>
+				<li><a href="#">腾讯微薄</a></li>
+			</ul>
+		</div> -->
 	</div>
-	<!--west-->
-	<div data-options="region:'south',border:false"
-		style="height:50px;background:#fff;padding:10px;">
-		<div id="footer">
-			Copyright &copy; 2015 by hellozw.<br> All Rights Reserved<br>
-		</div>
-	</div>
-	<!--//主体内容部分-->
-	<div data-options="region:'center'" class="indexcenter"
-		title="欢迎使用后台管理系统">
-		<div id="tabs_index" class="easyui-tabs" fit="true" border="false">
-			<div title="首页" style="overflow:hidden; "></div>
-		</div>
-	</div>
-	<!--center-->
-	<!--//主体内容部分-->
-	<div id="dialog_cms" data-options="iconCls:'icon-save'"></div>
+	
+</div>
+</form>
+
+<div class="hr_25"></div>
+<!-- <div class="footer">
+	<p><a href="#">慕课简介</a><i>|</i><a href="#">慕课公告</a><i>|</i> <a href="#">招纳贤士</a><i>|</i><a href="#">联系我们</a><i>|</i>客服热线：400-675-1234</p>
+	<p>Copyright &copy; 2006 - 2018 慕课版权所有&nbsp;&nbsp;&nbsp;京ICP备09037834号&nbsp;&nbsp;&nbsp;京ICP证B1034-8373号&nbsp;&nbsp;&nbsp;某市公安局XX分局备案编号：123456789123</p>
+	<p class="web"><a href="#"><img src="images/webLogo.jpg" alt="logo"></a><a href="#"><img src="images/webLogo.jpg" alt="logo"></a><a href="#"><img src="images/webLogo.jpg" alt="logo"></a><a href="#"><img src="images/webLogo.jpg" alt="logo"></a></p>
+</div> -->
 </body>
 </html>

@@ -39,7 +39,7 @@
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置, InternalResourceViewResolver 配置到最后 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-    	<property name="prefix" value="/admin/" />
+    	<property name="prefix" value="/WEB-INF/jsp/" />
     	<property name="suffix" value=".jsp" />
 	</bean>
     

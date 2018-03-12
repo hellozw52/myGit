@@ -8,10 +8,6 @@
 <title>登陆</title>
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/reset.css">
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/main.css">
-<!--[if IE 6]>
-<script type="text/javascript" src="js/DD_belatedPNG_0.0.8a-min.js"></script>
-<script type="text/javascript" src="js/ie6Fixpng.js"></script>
-<![endif]-->
 </head>
 
 <body>
