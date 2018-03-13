@@ -28,15 +28,15 @@
 
 	<div id="tb" style="padding:3px">
 		<span>videoId:</span> <input id="videoId"
-			style="line-height:26px;border:1px solid #ccc"
+			style="line-height:20px;border:1px solid #ccc"
 			onkeypress="if(event.keyCode==13) {btn_search.click();return false;}">
 			
 		<span>assetId:</span> <input id="assetId"
-			style="line-height:26px;border:1px solid #ccc" 
+			style="line-height:20px;border:1px solid #ccc" 
 			onkeypress="if(event.keyCode==13) {btn_search.click();return false;}">
 			
 		<span>assetName:</span> <input id="assetName"
-			style="line-height:26px;border:1px solid #ccc" 
+			style="line-height:20px;border:1px solid #ccc" 
 			onkeypress="if(event.keyCode==13) {btn_search.click();return false;}">
 		
 		<a href="#" id="btn_search" class="easyui-linkbutton"

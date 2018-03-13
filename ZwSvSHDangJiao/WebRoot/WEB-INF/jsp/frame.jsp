@@ -65,7 +65,7 @@
 
 	</div>
 	<div data-options="region:'west',split:true,title:'导航菜单'"
-		style="width:200px;">
+		style="width:200px;height:500px;" split="true">
 		<div class="easyui-accordion sider"
 			data-options="fit:true,border:false">
 			<!--//左侧菜单导航-->
