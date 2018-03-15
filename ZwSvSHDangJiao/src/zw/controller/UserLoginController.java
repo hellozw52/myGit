@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  * @author zhaowei 
  */
 //将参数username的值存入到session中
-@SessionAttributes(value = "username")
+@SessionAttributes("username")
 @Controller
 @RequestMapping("/userlogin")
 public class UserLoginController {
@@ -37,6 +37,8 @@ public class UserLoginController {
 		 * 还可以通过模型属性的对象类型指定哪些模型属性需要放到会话中(实际上使用的是types属性值),
 		 */
 		return "frame";
+//		return "redirect:/frame.jsp";
+		
 	}else{
 	    return "error";
 	}

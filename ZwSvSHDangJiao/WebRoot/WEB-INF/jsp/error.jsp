@@ -8,6 +8,6 @@
 </head>
 <body>
 	<h3>登录失败</h3>
-	<a href="../index.jsp">重新登录</a>
+	<a href="../login.jsp">重新登录</a>
 </body>
 </html>
