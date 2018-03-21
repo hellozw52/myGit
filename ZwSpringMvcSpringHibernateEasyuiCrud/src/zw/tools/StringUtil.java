@@ -1,6 +1,7 @@
 package zw.tools;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,17 @@ public class StringUtil {
 		jobj.accumulate("rows", list);
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().write(jobj.toString());
+	}
+	
+	/**
+	 * 转为UTF8编码格式
+	 * @param s
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public static String toUTF8(String s) throws UnsupportedEncodingException{
+	    String s1 = new String(s.getBytes("iso-8859-1"),"utf-8");
+	    return s1;
 	}
 
 }

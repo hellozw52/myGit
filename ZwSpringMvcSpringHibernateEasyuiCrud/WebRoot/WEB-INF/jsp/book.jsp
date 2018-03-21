@@ -63,21 +63,21 @@
 	function doSearch() {
 
 		/* 获取参数值 */
-		var videoId = $('#videoId').val();
-		var assetId = $('#assetId').val();
-		var assetName = $('#assetName').val();
+		var id = $('#id').val();
+		var isbn = $('#isbn').val();
+		var title = $('#title').val();
 
 		/* 三个参数只要有一个不为空，就查询结果 */
-		if (videoId||assetId||assetName) {
-			$('#dg_video').datagrid('options').url = '../videolist/getVideoInfoManyPara';
+		if (bookid||isbn||title) {
+			$('#dg_video').datagrid('options').url = '../book/getBookInfoManyPara';
 			$('#dg_video').datagrid('load', {
-				videoId : videoId,
-				assetId : assetId,
-				assetName : assetName
+				id : id,
+				isbn : isbn,
+				title : title
 			});
 			/* 所有参数均为空，默认查询第1页结果 */
 		} else {
-			$('#dg_video').datagrid('options').url = '../videolist/getVideoInfoList';
+			$('#dg_video').datagrid('options').url = '../book/list';
 			$('#dg_video').datagrid('load');
 		}
 	}
@@ -134,15 +134,15 @@
 	</div>
 
 	<!-- <div id="tb" style="padding:3px">
-		<span>videoId:</span> <input id="videoId"
+		<span>id:</span> <input id="id"
 			style="line-height:20px;border:1px solid #ccc"
 			onkeypress="if(event.keyCode==13) {btn_search.click();return false;}">
 			
-		<span>assetId:</span> <input id="assetId"
+		<span>isbn:</span> <input id="isbn"
 			style="line-height:20px;border:1px solid #ccc" 
 			onkeypress="if(event.keyCode==13) {btn_search.click();return false;}">
 			
-		<span>assetName:</span> <input id="assetName"
+		<span>title:</span> <input id="title"
 			style="line-height:20px;border:1px solid #ccc" 
 			onkeypress="if(event.keyCode==13) {btn_search.click();return false;}">
 		

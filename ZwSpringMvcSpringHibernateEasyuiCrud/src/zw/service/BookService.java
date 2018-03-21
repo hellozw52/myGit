@@ -38,7 +38,7 @@ public class BookService {
     }
 
     /**
-     * 新增
+     * 增加
      * @param book
      */
     public void add(SsmBook book) {
@@ -78,63 +78,54 @@ public class BookService {
 
 //    /**
 //     * 根据三个参数查询结果（分页）其中page，rows用于分页
-//     * @param videoId
-//     * @param assetId
-//     * @param assetName
+//     * @param id
+//     * @param isbn
+//     * @param title
 //     * 
 //     * @param page
 //     * @param rows
 //     * @return
 //     */
-//    public List<WiredVideo> getVideoInfoManyPara(int videoId,String assetId,String assetName,String page, String rows) {
+//    public List<SsmBook> getBookInfoManyPara(int id,String isbn,String title,String page, String rows) {
 //	// TODO Auto-generated method stub
-//	return videoDao.getVideoInfoManyPara(videoId,assetId,assetName,page,rows);
+//	return bookDao.getBookInfoManyPara(id,isbn,title,page,rows);
 //    }
 //    
 //    /**
 //     * 根据两个参数查询结果（分页）其中page，rows用于分页
-//     * @param assetId
-//     * @param assetName
+//     * @param isbn
+//     * @param title
 //     * 
 //     * @param rows 
 //     * @param page 
 //     * @return
 //     */
-//    public List<WiredVideo> getVideoInfoManyPara(String assetId,String assetName, String page, String rows) {
+//    public List<SsmBook> getBookInfoManyPara(String isbn,String title,String page, String rows) {
 //	// TODO Auto-generated method stub
-//	return videoDao.getVideoInfoManyPara(assetId,assetName,page,rows);
-//    }
-//    
-//    /**
-//     * 根据两个参数查询的结果总数
-//     * @param assetId
-//     * @param assetName
-//     * @return
-//     */
-//    public int getVideoInfoManyParaTotalNum(String assetId, String assetName) {
-//	// TODO Auto-generated method stub
-//	return videoDao.getVideoInfoManyParaTotalNum(assetId, assetName);
+//	return bookDao.getBookInfoManyPara(isbn,title,page,rows);
 //    }
 //
 //    /**
 //     * 根据三个参数查询的结果总数
-//     * @param videoId
-//     * @param assetId
-//     * @param assetName
+//     * @param id
+//     * @param isbn
+//     * @param title
 //     * @return
 //     */
-//    public int getVideoInfoManyParaTotalNum(int videoId, String assetId,String assetName) {
+//    public int getBookInfoManyParaTotalNum(int id,String isbn,String title) {
 //	// TODO Auto-generated method stub
-//	return videoDao.getVideoInfoManyParaTotalNum(videoId, assetId, assetName);
+//	return bookDao.getBookInfoManyParaTotalNum(id, isbn, title);
 //    }
-//
+//    
 //    /**
-//     * 获取所有视频信息
-//     * @return 
+//     * 根据两个参数查询的结果总数
+//     * @param isbn
+//     * @param title
+//     * @return
 //     */
-//    public List<WiredVideo> getAllVideoInfo() {
+//    public int getBookInfoManyParaTotalNum(String isbn,String title) {
 //	// TODO Auto-generated method stub
-//	return videoDao.getAllVideoInfo();
+//	return bookDao.getBookInfoManyParaTotalNum(isbn, title);
 //    }
 
 }

@@ -224,4 +224,16 @@ public class SsmBook implements java.io.Serializable {
 	this.indate = indate;
     }
 
+    @Override
+    public String toString() {
+	return "SsmBook [id=" + id + ", isbn=" + isbn + ", path=" + path
+		+ ", title=" + title + ", subtitle=" + subtitle
+		+ ", originalTitle=" + originalTitle + ", marketPrice="
+		+ marketPrice + ", intro=" + intro + ", binding=" + binding
+		+ ", pages=" + pages + ", author=" + author + ", publisher="
+		+ publisher + ", catalog=" + catalog + ", supply=" + supply
+		+ ", status=" + status + ", hot=" + hot + ", indate=" + indate
+		+ "]";
+    }
+
 }
