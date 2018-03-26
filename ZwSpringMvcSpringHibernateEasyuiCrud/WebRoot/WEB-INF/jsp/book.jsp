@@ -26,7 +26,7 @@
 				var result = eval('(' + result + ')');
 				if (result.success) {
 					$('#dlg_shop').dialog('close'); // close the dialog
-					$('#dg_shop').datagrid('reload'); // reload the user data
+					$('#dg_shop').datagrid('reload'); // reload the data
 				} else {
 					$.messager.show({
 						title : 'Error',

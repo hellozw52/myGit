@@ -1,6 +1,5 @@
 package zw.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +58,7 @@ public class BookController extends BaseController{
     }
     
     /**
-     * Create 中文乱码问题暂未解决!
+     * Create
      * @param request
      * @param response 
      * @param isbn  接收前端页面的参数
@@ -85,7 +84,7 @@ public class BookController extends BaseController{
 	    book.setPublisher(publisher);
 	    book.setAuthor(author);
 	    
-	    System.out.println(book.toString());
+//	    System.out.println(book.toString());
 	    // 新增
 	    this.bookService.add(book);
 	    // 给前端返回{"success":true}
@@ -100,7 +99,7 @@ public class BookController extends BaseController{
     }
     
     /**
-     * Update 中文乱码问题暂未解决
+     * Update
      * @param request
      * @param response
      * @param id     
@@ -170,51 +169,4 @@ public class BookController extends BaseController{
 	}
 	return null;
     }
-    
-    
-//    @ResponseBody
-//    @RequestMapping("/getBookInfoManyPara")
-//    public Map<String, Object> getBookInfoManyPara(
-//	    @RequestParam("id") String id,
-//	    @RequestParam("isbn") String isbn,
-//	    @RequestParam("title") String title,
-//	    @RequestParam("page") String page, 
-//	    @RequestParam("rows") String rows
-//	    ) {
-//
-//	// 对查询结果计数
-//	int bookcount;
-//	
-//	// 存放查询结果的数组
-//	List<SsmBook> booklist = new ArrayList<>();
-//	
-//	// 参数只要有一个不为空
-//	if(!id.isEmpty()||!isbn.isEmpty()||!title.isEmpty()){
-//	    
-//	    // 如果id为空
-//	    if(id.isEmpty()){
-//		
-//		// 根据两个参数进行查询,分页,获取结果数。其中page，rows参数用于分页
-//		booklist = bookService.getBookInfoManyPara(isbn,title,page,rows);
-//		bookcount = bookService.getBookInfoManyParaTotalNum(isbn,title);
-//	    }else{
-//		// 根据三个参数进行查询,分页,获取结果数。其中page，rows参数用于分页
-//		booklist = bookService.getBookInfoManyPara(Integer.parseInt(id),isbn,title,page,rows);
-//		bookcount = bookService.getBookInfoManyParaTotalNum(Integer.parseInt(id),isbn,title);
-//	    }
-//	    
-//	}else{
-//	    // 所有参数均为空时，显示默认查询结果,分页,获取结果数
-//	    booklist = bookService.getCurrentPageBookList(page,rows);
-//	    bookcount = bookService.getTotalNum();
-//	}
-//
-//	// 实例化data 存放数据， 注意！rows中存放的是数组！！！
-//	data = new HashMap<String, Object>();
-//	data.put("rows", booklist);
-//	data.put("total", bookcount);
-//
-//	// 返回json数据
-//	return data;
-//    }
 }
