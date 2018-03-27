@@ -1,6 +1,7 @@
 package zw.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,15 @@ public class BookService {
     public BookDao bookDao;
     
     /**
+     * 通过id获取条目
+     * @param i
+     * @return SsmBook
+     */
+    public SsmBook getById(int i) {
+	return bookDao.getById(i);
+    }
+    
+    /**
      * 获取当前页数据
      * @param page 用于分页
      * @param rows
@@ -26,15 +36,6 @@ public class BookService {
     public List<SsmBook> getCurrentPageBookList(String page, String rows) {
 	// TODO Auto-generated method stub
 	return bookDao.getCurrentPageBookList(page,rows);
-    }
-    
-    /**
-     * 总数
-     * @return int
-     */
-    public int getTotalNum() {
-	// TODO Auto-generated method stub
-	return bookDao.getTotalNum();
     }
 
     /**
@@ -66,13 +67,33 @@ public class BookService {
 	bookDao.delete(book);
 	
     }
+    
+    /**
+     * 获取总数
+     * @return int
+     */
+    public int getTotalNum() {
+	// TODO Auto-generated method stub
+	return bookDao.getTotalNum();
+    }
 
     /**
-     * 通过id获取条目
-     * @param i
-     * @return SsmBook
+     * 多条件模糊查询
+     * @param params 查询条件
+     * @return
      */
-    public SsmBook getById(int i) {
-	return bookDao.getById(i);
+    public List<SsmBook> search(Map<String, Object> params) {
+	// TODO Auto-generated method stub
+	return bookDao.search(params);
+    }
+    
+    /**
+     * 获取查询结果个数
+     * @param params
+     * @return
+     */
+    public int getTotalNum(Map<String, Object> params) {
+	// TODO Auto-generated method stub
+	return bookDao.getTotalNum(params);
     }
 }

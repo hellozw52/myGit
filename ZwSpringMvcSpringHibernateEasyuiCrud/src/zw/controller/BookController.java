@@ -1,5 +1,6 @@
 package zw.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,22 +38,73 @@ public class BookController extends BaseController{
      * 接收前端传递的数据page，rows 获取当前页数据 返回json数据
      * @param page
      * @param rows
-     * @return
+     * @return @ResponseBody json
      */
     @ResponseBody
     @RequestMapping("/list")
-    public Map<String, Object> getVideoInfoList(
+    public Map<String, Object> list(
 	    @RequestParam("page") String page, 
 	    @RequestParam("rows") String rows) {
-
-	List<SsmBook> booklist = bookService.getCurrentPageBookList(page,
-		rows);// 获取某页数据
+	// 获取某页数据
+	List<SsmBook> booklist = bookService.getCurrentPageBookList(page,rows);
+	// 获取总数
 	int videocount = bookService.getTotalNum();
 
 	// 实例化data 存放数据
 	data = new HashMap<String, Object>();
 	data.put("rows", booklist);
 	data.put("total", videocount);
+	// 返回json数据
+	return data;
+    }
+    
+    /**
+     * 多条件模糊查询
+     * @param id
+     * @param isbn
+     * @param title
+     * @param page
+     * @param rows
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/search")
+    public Map<String, Object> search(
+	    @RequestParam("id") String id, 
+	    @RequestParam("isbn") String isbn,
+	    @RequestParam("title") String title, 
+	    @RequestParam("page") String page, 
+	    @RequestParam("rows") String rows) {
+	
+	//存放待查询的参数
+	Map<String,Object> params = new HashMap<>();
+	// 对查询结果计数
+	int count;
+	// 存放查询结果的数组
+	List<SsmBook> booklist = new ArrayList<>();
+		
+	// 参数只要有一个不为空，即查询！
+	if(!id.isEmpty()||!isbn.isEmpty()||!title.isEmpty()){
+		    
+	    // 根据三个参数进行查询，没有的参数为空。其中page，rows参数用于分页
+	    params.put("id", id);
+	    params.put("isbn", isbn);
+	    params.put("title", title);
+	    params.put("page", page);
+	    params.put("rows", rows);
+		
+	    booklist = bookService.search(params);
+	    count = bookService.getTotalNum(params);
+	}else{
+	    // 所有参数均为空时，显示默认查询结果
+	    booklist = bookService.getCurrentPageBookList(page,rows);
+	    count = bookService.getTotalNum();
+	}
+
+	// 实例化data 存放数据
+	data = new HashMap<String, Object>();
+	data.put("rows", booklist);
+	data.put("total", count);
 	// 返回json数据
 	return data;
     }
@@ -84,7 +136,6 @@ public class BookController extends BaseController{
 	    book.setPublisher(publisher);
 	    book.setAuthor(author);
 	    
-//	    System.out.println(book.toString());
 	    // 新增
 	    this.bookService.add(book);
 	    // 给前端返回{"success":true}
@@ -146,7 +197,7 @@ public class BookController extends BaseController{
      * Delete
      * @param request
      * @param response
-     * @param id       delete by id
+     * @param id
      * @return
      * @throws Exception
      */

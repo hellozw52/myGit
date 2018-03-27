@@ -1,6 +1,7 @@
 package zw.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -89,6 +90,49 @@ public class BookDao {
     public SsmBook getById(int i) {
 	// TODO Auto-generated method stub
 	return (SsmBook)this.getSession().get(SsmBook.class, i);
+    }
+
+    /**
+     * 多条件模糊查询
+     * @param params
+     * @return
+     */
+    public List<SsmBook> search(Map<String, Object> params) {
+	// TODO Auto-generated method stub
+	
+	//获取参数
+	String id = (String) params.get("id");
+	String isbn = (String) params.get("isbn");
+	String title = (String) params.get("title");
+	
+	//转为int类型
+	int page = Integer.parseInt((String) params.get("page"));
+	int rows = Integer.parseInt((String) params.get("rows"));
+		
+	return (List<SsmBook>) this.getSession()
+		.createQuery("from SsmBook s where s.id like '%"+id+"%' and s.isbn like '%"+isbn+"%' and s.title like '%"+title+"%'" )
+		.setFirstResult((page - 1) * rows)
+		.setMaxResults(rows)
+		.list();
+    }
+
+    /**
+     * 查询结果的个数
+     * @param params
+     * @return
+     */
+    public int getTotalNum(Map<String, Object> params) {
+	// TODO Auto-generated method stub
+	
+	//获取参数
+	String id = (String) params.get("id");
+	String isbn = (String) params.get("isbn");
+	String title = (String) params.get("title");
+			
+	return this.getSession()
+		.createQuery("from SsmBook s where s.id like '%"+id+"%' and s.isbn like '%"+isbn+"%' and s.title like '%"+title+"%'" )
+		.list()
+		.size();
     }
 
 }
