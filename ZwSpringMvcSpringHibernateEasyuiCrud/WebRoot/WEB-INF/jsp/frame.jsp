@@ -68,6 +68,7 @@
 		style="width:200px;height:500px;" split="true">
 		<div class="easyui-accordion sider"
 			data-options="fit:true,border:false">
+			
 			<!--//左侧菜单导航-->
 			<!--waiceng-->
 			<div title="图书管理模块" data-options="iconCls:'icon-mini-add'"
@@ -75,24 +76,27 @@
 				<ul class="easyui-tree" data-options="animate:true">
 					<li data-options="state:'closed'"><span>图书管理</span>
 						<ul>
-							<li><a href="javascript:viod(0);" cmshref="../book/goToBookTab"
-								type="member_perinfo" rel="">图书列表</a></li>
-						</ul></li>
+							<li>
+								<a href="javascript:viod(0);" cmshref="../book/goToBookTab" type="member_perinfo" rel="">图书列表</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
 			</div>
 			<!--waiceng-->
-			<!--
-			<div title="商家中心" data-options="iconCls:'icon-mini-add'"
+			
+			<div title="用户管理" data-options="iconCls:'icon-mini-add'"
 				style="padding:10px;">
 				<ul class="easyui-tree" data-options="animate:true">
-					<li data-options="state:'closed'"><span>商家管理</span>
+					<li data-options="state:'closed'"><span>用户管理</span>
 						<ul>
-							<li><a href="javascript:viod(0);" cmshref="shop/shop.action"
-								type="member_perinfo" rel="">商家管理</a></li>
-							<li><a href="javascript:viod(0);"
-								cmshref="shop/shopCategory.action" type="member_perinfo" rel="">类别管理</a></li>
-						</ul></li>
+							<li>
+								<a href="javascript:viod(0);" cmshref="../user/goToUserTab" type="member_perinfo" rel="">用户管理</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
 			</div>
-			-->
 			<!--//左侧菜单导航-->
 		</div>
 		<!--accordion-->

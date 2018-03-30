@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>SpringMVC-Spring-Hibernate电视门户视频系统</title>
+    <title>SpringMVC-Spring-Hibernate</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
     <style type=text/css>
         body {
@@ -76,7 +76,7 @@
 </head>
 <body>
 <form id=adminlogin method=post
-      name=adminlogin action="${pageContext.request.contextPath}/userlogin/login">
+      name=adminlogin action="${pageContext.request.contextPath}/user/login">
     <div></div>
     <table style="margin: auto; width: 100%; height: 100%" border=0
            cellSpacing=0 cellPadding=0>

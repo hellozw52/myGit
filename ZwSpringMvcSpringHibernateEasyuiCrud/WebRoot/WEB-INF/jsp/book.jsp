@@ -168,8 +168,9 @@
 			<th data-options="field:'id',width:80">自增ID</th>
 			<th data-options="field:'isbn',width:200">图书编号</th>
 			<th data-options="field:'title',width:300">图书名称</th>
-			<th data-options="field:'author',width:200">图书作者</th>
 			<th data-options="field:'publisher',width:200">出版机构</th>
+			<th data-options="field:'author',width:200">图书作者</th>
+			
 		</tr>
 	</thead>
 </table>

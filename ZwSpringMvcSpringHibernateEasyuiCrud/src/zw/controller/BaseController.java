@@ -1,8 +1,11 @@
 package zw.controller;
 
 import java.util.Map;
+
 import javax.annotation.Resource;
+
 import zw.service.BookService;
+import zw.service.UserService;
 
 
 /**
@@ -20,6 +23,8 @@ public class BaseController{
     // 待注入的service对象
     @Resource
     protected BookService bookService;
+    @Resource
+    protected UserService userService;
     
     // get和set方法
     public Map<String, Object> getData() {

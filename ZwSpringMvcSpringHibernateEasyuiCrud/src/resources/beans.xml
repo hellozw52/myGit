@@ -53,6 +53,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>zw.model.SsmBook</value>
+				<value>zw.model.SsmUser</value>
 			</list>
 		</property>
 	</bean>
