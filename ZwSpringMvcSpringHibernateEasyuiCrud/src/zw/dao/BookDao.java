@@ -28,7 +28,8 @@ public class BookDao {
      * @param rows
      * @return
      */
-    public List<SsmBook> getCurrentPageBookList(String page, String rows) {
+    @SuppressWarnings("unchecked")
+    public List<SsmBook> getCurrentPageDataList(String page, String rows) {
 	// TODO Auto-generated method stub
 	// 当为缺省值的时候进行赋值
 	int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
@@ -84,12 +85,12 @@ public class BookDao {
 
     /**
      * 根据id查找
-     * @param i
+     * @param id
      * @return
      */
-    public SsmBook getById(int i) {
+    public SsmBook getById(int id) {
 	// TODO Auto-generated method stub
-	return (SsmBook)this.getSession().get(SsmBook.class, i);
+	return (SsmBook)this.getSession().get(SsmBook.class, id);
     }
 
     /**
@@ -97,6 +98,7 @@ public class BookDao {
      * @param params
      * @return
      */
+    @SuppressWarnings("unchecked")
     public List<SsmBook> search(Map<String, Object> params) {
 	// TODO Auto-generated method stub
 	

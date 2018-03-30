@@ -111,7 +111,7 @@
 	</div>
 	<!--//主体内容部分-->
 	<div data-options="region:'center'" class="indexcenter"
-		title="图书管理模块">
+		title="后台管理区域">
 		<div id="tabs_index" class="easyui-tabs" fit="true" border="false">
 			<div title="首页" style="overflow:hidden; "></div>
 		</div>

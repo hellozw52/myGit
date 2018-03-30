@@ -46,7 +46,7 @@ public class BookController extends BaseController{
 	    @RequestParam("page") String page, 
 	    @RequestParam("rows") String rows) {
 	// 获取某页数据
-	List<SsmBook> booklist = bookService.getCurrentPageBookList(page,rows);
+	List<SsmBook> booklist = bookService.getCurrentPageDataList(page,rows);
 	// 获取总数
 	int videocount = bookService.getTotalNum();
 
@@ -97,7 +97,7 @@ public class BookController extends BaseController{
 	    count = bookService.getTotalNum(params);
 	}else{
 	    // 所有参数均为空时，显示默认查询结果
-	    booklist = bookService.getCurrentPageBookList(page,rows);
+	    booklist = bookService.getCurrentPageDataList(page,rows);
 	    count = bookService.getTotalNum();
 	}
 

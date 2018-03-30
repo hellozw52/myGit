@@ -20,11 +20,11 @@ public class BookService {
     
     /**
      * 通过id获取条目
-     * @param i
+     * @param id
      * @return SsmBook
      */
-    public SsmBook getById(int i) {
-	return bookDao.getById(i);
+    public SsmBook getById(int id) {
+	return bookDao.getById(id);
     }
     
     /**
@@ -33,9 +33,9 @@ public class BookService {
      * @param rows
      * @return
      */
-    public List<SsmBook> getCurrentPageBookList(String page, String rows) {
+    public List<SsmBook> getCurrentPageDataList(String page, String rows) {
 	// TODO Auto-generated method stub
-	return bookDao.getCurrentPageBookList(page,rows);
+	return bookDao.getCurrentPageDataList(page,rows);
     }
 
     /**
