@@ -43,19 +43,13 @@ public class UserDao {
     
     /**
      * 获取当前页面数据
-     * @param page
-     * @param rows
+     * @param currentpage
+     * @param pagesize
      * @return
      */
     @SuppressWarnings("unchecked")
-    public List<SsmUser> getCurrentPageDataList(String page, String rows) {
+    public List<SsmUser> getCurrentPageDataList(int currentpage, int pagesize) {
 	// TODO Auto-generated method stub
-	// 当为缺省值的时候进行赋值
-	int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
-			: page);// 第几页
-	int pagesize = Integer.parseInt((rows == null || rows == "0") ? "15"
-			: rows);// 每页多少行
-
 	List<SsmUser> list = this.getSession()
 			.createQuery("from SsmUser")
 			.setFirstResult((currentpage - 1) * pagesize)

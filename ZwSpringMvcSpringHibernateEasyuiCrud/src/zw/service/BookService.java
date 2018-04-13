@@ -29,13 +29,13 @@ public class BookService {
     
     /**
      * 获取当前页数据
-     * @param page 用于分页
-     * @param rows
+     * @param currentpage
+     * @param pagesize
      * @return
      */
-    public List<SsmBook> getCurrentPageDataList(String page, String rows) {
+    public List<SsmBook> getCurrentPageDataList(int currentpage, int pagesize) {
 	// TODO Auto-generated method stub
-	return bookDao.getCurrentPageDataList(page,rows);
+	return bookDao.getCurrentPageDataList(currentpage,pagesize);
     }
 
     /**

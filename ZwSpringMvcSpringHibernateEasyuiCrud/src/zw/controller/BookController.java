@@ -45,8 +45,13 @@ public class BookController extends BaseController{
     public Map<String, Object> list(
 	    @RequestParam("page") String page, 
 	    @RequestParam("rows") String rows) {
+	
+	// 获取第几页、每页多少行 等参数；缺省赋值: page=1 rows=15
+	int currentpage = Integer.parseInt((page == null || page == "0") ? "1": page);// 第几页
+	int pagesize = Integer.parseInt((rows == null || rows == "0") ? "15": rows);// 每页多少行
+	
 	// 获取某页数据
-	List<SsmBook> booklist = bookService.getCurrentPageDataList(page,rows);
+	List<SsmBook> booklist = bookService.getCurrentPageDataList(currentpage,pagesize);
 	// 获取总数
 	int videocount = bookService.getTotalNum();
 
@@ -78,33 +83,37 @@ public class BookController extends BaseController{
 	
 	//存放待查询的参数
 	Map<String,Object> params = new HashMap<>();
-	// 对查询结果计数
-	int count;
 	// 存放查询结果的数组
 	List<SsmBook> booklist = new ArrayList<>();
+	// 对查询结果计数
+	int resultcount;
+	
+	// 获取第几页、每页多少行 等参数；缺省赋值: page=1 rows=15
+	int currentpage = Integer.parseInt((page == null || page == "0") ? "1": page);// 第几页
+	int pagesize = Integer.parseInt((rows == null || rows == "0") ? "15": rows);// 每页多少行
 		
 	// 参数只要有一个不为空，即查询！
 	if(!id.isEmpty()||!isbn.isEmpty()||!title.isEmpty()){
 		    
-	    // 根据三个参数进行查询，没有的参数为空。其中page，rows参数用于分页
+	    // 根据三个参数进行查询，没有的参数为空。其中currentpage，pagesize参数用于分页
 	    params.put("id", id);
 	    params.put("isbn", isbn);
 	    params.put("title", title);
-	    params.put("page", page);
-	    params.put("rows", rows);
+	    params.put("currentpage", currentpage);
+	    params.put("pagesize", pagesize);
 		
 	    booklist = bookService.search(params);
-	    count = bookService.getTotalNum(params);
+	    resultcount = bookService.getTotalNum(params);
 	}else{
 	    // 所有参数均为空时，显示默认查询结果
-	    booklist = bookService.getCurrentPageDataList(page,rows);
-	    count = bookService.getTotalNum();
+	    booklist = bookService.getCurrentPageDataList(currentpage,pagesize);
+	    resultcount = bookService.getTotalNum();
 	}
 
 	// 实例化data 存放数据
 	data = new HashMap<String, Object>();
 	data.put("rows", booklist);
-	data.put("total", count);
+	data.put("total", resultcount);
 	// 返回json数据
 	return data;
     }

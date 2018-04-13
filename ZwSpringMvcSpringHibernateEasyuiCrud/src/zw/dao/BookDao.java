@@ -24,23 +24,18 @@ public class BookDao {
     
     /**
      * 获取当前页面数据
-     * @param page
-     * @param rows
+     * @param currentpage
+     * @param pagesize
      * @return
      */
     @SuppressWarnings("unchecked")
-    public List<SsmBook> getCurrentPageDataList(String page, String rows) {
+    public List<SsmBook> getCurrentPageDataList(int currentpage, int pagesize) {
 	// TODO Auto-generated method stub
-	// 当为缺省值的时候进行赋值
-	int currentpage = Integer.parseInt((page == null || page == "0") ? "1"
-		: page);// 第几页
-	int pagesize = Integer.parseInt((rows == null || rows == "0") ? "15"
-		: rows);// 每页多少行
-
 	List<SsmBook> list = this.getSession()
 		.createQuery("from SsmBook")
 		.setFirstResult((currentpage - 1) * pagesize)
-		.setMaxResults(pagesize).list();
+		.setMaxResults(pagesize)
+		.list();
 
 	return list;
     }
@@ -108,13 +103,13 @@ public class BookDao {
 	String title = (String) params.get("title");
 	
 	//转为int类型
-	int page = Integer.parseInt((String) params.get("page"));
-	int rows = Integer.parseInt((String) params.get("rows"));
+	int currentpage = (int) params.get("currentpage");
+	int pagesize = (int) params.get("pagesize");
 		
 	return (List<SsmBook>) this.getSession()
 		.createQuery("from SsmBook s where s.id like '%"+id+"%' and s.isbn like '%"+isbn+"%' and s.title like '%"+title+"%'" )
-		.setFirstResult((page - 1) * rows)
-		.setMaxResults(rows)
+		.setFirstResult((currentpage - 1) * pagesize)
+		.setMaxResults(pagesize)
 		.list();
     }
 
