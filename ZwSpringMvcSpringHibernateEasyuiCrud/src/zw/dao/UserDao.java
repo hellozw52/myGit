@@ -1,23 +1,15 @@
 package zw.dao;
 
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import zw.model.SsmUser;
 
+/**
+ * 继承父类，实现增删改查等常用操作
+ * @author zhaowei
+ */
 @Repository
-public class UserDao {
-
-    // 注入sessionfactory
-    @Autowired
-    public SessionFactory sessionFactory;
-
-    // 获取当前session
-    private Session getSession() {
-	return sessionFactory.getCurrentSession();
-    }
+public class UserDao extends BaseDao {
 
     /**
      * 判断该用户是否在数据库中存在
@@ -32,7 +24,7 @@ public class UserDao {
 	String password = user.getPassword();
 	
 	// 查询数据库  采用sql语句进行查询
-	int usercount = this.getSession()
+	int usercount = super.getSession()
 		.createSQLQuery("select * from ssm_user user where user.userName = '"+username+"' and user.password = '"+password+"'")
 		.list().size();
 		
@@ -40,66 +32,63 @@ public class UserDao {
     }
     
     /**
-     * 获取当前页面数据
-     * @param currentpage
-     * @param pagesize
+     * 获取当前页面数据  通过父类实现
+     * @param start
+     * @param size
      * @return
      */
-    @SuppressWarnings("unchecked")
-    public List<SsmUser> getCurrentPageDataList(int currentpage, int pagesize) {
+    public List<SsmUser> getCurrentPageDataList(int start, int size) {
 	// TODO Auto-generated method stub
-	List<SsmUser> list = this.getSession()
-			.createQuery("from SsmUser")
-			.setFirstResult((currentpage - 1) * pagesize)
-			.setMaxResults(pagesize).list();
+	List<SsmUser> list = super.list(SsmUser.class, start, size,null);
 	return list;
     }
 
     /**
-     * 获取总数
+     * 获取总数  通过父类实现
      * @return
      */
     public int getTotalNum() {
 	// TODO Auto-generated method stub
-	return this.getSession().createQuery("from SsmUser").list().size();
+	return super.count(SsmUser.class);
+	
     }
     
     /**
-     * 获取某个
+     * 获取某个  通过父类实现
      * @param id
      * @return
      */
     public SsmUser getById(int id) {
 	// TODO Auto-generated method stub
-	return (SsmUser)this.getSession().get(SsmUser.class, id);
+	return super.get(SsmUser.class, id);
     }
 
     /**
-     * 增
+     * 增   通过父类实现
      * @param user
      * @return
      */
     public void add(SsmUser user) {
 	// TODO Auto-generated method stub
-	this.getSession().save(user);
+	super.saveOrUpdate(user);
     }
 
     /**
-     * 改
+     * 改  通过父类实现
      * @param user
      */
     public void update(SsmUser user) {
 	// TODO Auto-generated method stub
-	this.getSession().update(user);
+	super.update(user);
     }
 
     /**
-     * 删
+     * 删  通过父类实现
      * @param user
      */
     public void delete(SsmUser user) {
 	// TODO Auto-generated method stub
-	this.getSession().delete(user);
+	super.delete(user);
     }
 
 }

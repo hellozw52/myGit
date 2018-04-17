@@ -3,40 +3,28 @@ package zw.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import zw.model.SsmBook;
 
+/**
+ * 继承父类  实现书籍的增删改查
+ * @author zhaowei
+ */
 @Repository
-public class BookDao {
-
-    // 注入sessionfactory
-    @Autowired
-    public SessionFactory sessionFactory;
-
-    // 获取当前session
-    private Session getSession() {
-	return sessionFactory.getCurrentSession();
-    }
+public class BookDao extends BaseDao {
+    
+    /***********************基础 增删改 采用父类方法实现！**********************/
     
     /**
      * 获取当前页面数据
-     * @param currentpage
-     * @param pagesize
+     * @param start
+     * @param size
      * @return
      */
-    @SuppressWarnings("unchecked")
-    public List<SsmBook> getCurrentPageDataList(int currentpage, int pagesize) {
+    public List<SsmBook> getCurrentPageDataList(int start, int size) {
 	// TODO Auto-generated method stub
-	List<SsmBook> list = this.getSession()
-		.createQuery("from SsmBook")
-		.setFirstResult((currentpage - 1) * pagesize)
-		.setMaxResults(pagesize)
-		.list();
-
+	List<SsmBook> list = super.list(SsmBook.class, start, size,null);
 	return list;
     }
     
@@ -46,7 +34,7 @@ public class BookDao {
      */
     public int getTotalNum() {
 	// TODO Auto-generated method stub
-	return this.getSession().createQuery("from SsmBook").list().size();
+	return super.count(SsmBook.class);
     }
 
     
@@ -56,7 +44,7 @@ public class BookDao {
      */
     public void add(SsmBook book) {
 	// TODO Auto-generated method stub
-	this.getSession().save(book);
+	super.saveOrUpdate(book);
     }
 
     /**
@@ -65,7 +53,7 @@ public class BookDao {
      */
     public void update(SsmBook book) {
 	// TODO Auto-generated method stub
-	this.getSession().update(book);
+	super.update(book);
     }
 
     /**
@@ -74,7 +62,7 @@ public class BookDao {
      */
     public void delete(SsmBook book) {
 	// TODO Auto-generated method stub
-	this.getSession().delete(book);
+	super.delete(book);
 	
     }
 
@@ -85,11 +73,22 @@ public class BookDao {
      */
     public SsmBook getById(int id) {
 	// TODO Auto-generated method stub
-	return (SsmBook)this.getSession().get(SsmBook.class, id);
+	return super.get(SsmBook.class, id);
     }
+    
+    
+    /***********************基础 增删改 采用父类方法实现！**********************/
+    
+    
+    
+    
+    
+    
+    /***********************多条件模糊查询  采用自己写的方法实现！**********************/
+    
 
     /**
-     * 多条件模糊查询
+     * 多条件模糊查询  未用父类方法！
      * @param params
      * @return
      */
@@ -103,18 +102,18 @@ public class BookDao {
 	String title = (String) params.get("title");
 	
 	//转为int类型
-	int currentpage = (int) params.get("currentpage");
-	int pagesize = (int) params.get("pagesize");
+	int start = (int) params.get("start");
+	int size = (int) params.get("size");
 		
-	return (List<SsmBook>) this.getSession()
+	return (List<SsmBook>) super.getSession()
 		.createQuery("from SsmBook s where s.id like '%"+id+"%' and s.isbn like '%"+isbn+"%' and s.title like '%"+title+"%'" )
-		.setFirstResult((currentpage - 1) * pagesize)
-		.setMaxResults(pagesize)
+		.setFirstResult(start * size)
+		.setMaxResults(size)
 		.list();
     }
 
     /**
-     * 查询结果的个数
+     * 查询结果的个数  未用父类方法！
      * @param params
      * @return
      */
@@ -126,10 +125,13 @@ public class BookDao {
 	String isbn = (String) params.get("isbn");
 	String title = (String) params.get("title");
 			
-	return this.getSession()
+	return super.getSession()
 		.createQuery("from SsmBook s where s.id like '%"+id+"%' and s.isbn like '%"+isbn+"%' and s.title like '%"+title+"%'" )
 		.list()
 		.size();
+	
     }
+    
+    /***********************多条件模糊查询  采用自己写的方法实现！**********************/
 
 }

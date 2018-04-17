@@ -29,13 +29,13 @@ public class UserService {
 
     /**
      * 获取当前页面数据
-     * @param currentpage
-     * @param pagesize
+     * @param start  开始位置
+     * @param size   每页个数
      * @return
      */
-    public List<SsmUser> getCurrentPageDataList(int currentpage, int pagesize) {
+    public List<SsmUser> getCurrentPageDataList(int start, int size) {
 	// TODO Auto-generated method stub
-	return userDao.getCurrentPageDataList(currentpage,pagesize);
+	return userDao.getCurrentPageDataList(start,size);
     }
 
     /**

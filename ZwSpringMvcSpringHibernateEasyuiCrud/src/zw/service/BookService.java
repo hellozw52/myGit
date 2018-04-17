@@ -14,7 +14,7 @@ import zw.model.SsmBook;
 @Service
 public class BookService {
     
-    // 注入dao
+    // 注入bookDao
     @Autowired
     public BookDao bookDao;
     
@@ -29,13 +29,13 @@ public class BookService {
     
     /**
      * 获取当前页数据
-     * @param currentpage
-     * @param pagesize
+     * @param start
+     * @param size
      * @return
      */
-    public List<SsmBook> getCurrentPageDataList(int currentpage, int pagesize) {
+    public List<SsmBook> getCurrentPageDataList(int start, int size) {
 	// TODO Auto-generated method stub
-	return bookDao.getCurrentPageDataList(currentpage,pagesize);
+	return bookDao.getCurrentPageDataList(start,size);
     }
 
     /**

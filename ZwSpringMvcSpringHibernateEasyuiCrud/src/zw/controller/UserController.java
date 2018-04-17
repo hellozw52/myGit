@@ -54,8 +54,6 @@ public class UserController extends BaseController {
 	if (!username.isEmpty() && !password.isEmpty()) {
 	    // 实例化一个user  
 	    SsmUser user = new SsmUser();
-	    // 密码采用MD5加密
-//	    String MD5pwd = MD5Util.MD5Encode(password, "UTF-8");
 	    
 	    // 设置账户和密码
 	    user.setUserName(username);
@@ -89,12 +87,13 @@ public class UserController extends BaseController {
     public Map<String, Object> list(
 	    @RequestParam("page") String page, 
 	    @RequestParam("rows") String rows) {
-	// 获取第几页、每页多少行等参数   缺省时：page=1 rows=15
-	int currentpage = Integer.parseInt((page == null || page == "0") ? "1": page);// 第几页
-	int pagesize = Integer.parseInt((rows == null || rows == "0") ? "15": rows);// 每页多少行
+	
+	//获取开始位置和每页个数
+	int start = Integer.parseInt((page == null || page == "0") ? "1": page) - 1;// 开始位置
+	int size = Integer.parseInt((rows == null || rows == "0") ? "15": rows);// 每页个数
 	
 	// 获取当前页数据
-	List<SsmUser> userlist = userService.getCurrentPageDataList(currentpage,pagesize);
+	List<SsmUser> userlist = userService.getCurrentPageDataList(start,size);
 	// 获取总数
 	int usercount = userService.getTotalNum();
 
