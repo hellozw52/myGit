@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public class TicketDao extends BaseDao {
     
     /**
-     * 对视图进行查询
+     * 对视图进行查询   注意是视图，不是表！
      * @param tvn
      * @param entity_type
      * @return 返回观影券数组
