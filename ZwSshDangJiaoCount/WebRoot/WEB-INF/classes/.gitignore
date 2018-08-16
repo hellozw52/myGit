@@ -1,4 +1,2 @@
-/applicationContext.xml
-/com
-/struts.xml
-/util
+/com/
+/util/
