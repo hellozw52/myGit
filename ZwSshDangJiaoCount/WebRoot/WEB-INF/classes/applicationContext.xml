@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<context:component-scan base-package="com.ssh.*" />
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		 
+		<property name="jdbcUrl"
+			value="jdbc:sqlserver://10.63.70.164:1433;databaseName=hnyxnew">
+		</property>
+		<property name="user" value="sa"></property>
+		<property name="password" value="hncatv123"></property>
+		<property name="initialPoolSize" value="3" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="20" />
+		<property name="maxIdleTime" value="120" />
+		<property name="acquireIncrement" value="2" />
+		<property name="idleConnectionTestPeriod" value="60" />
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<prop key="hibernate.autoReconnect">true</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/ssh/bean/WiredVideo.hbm.xml</value>
+				<value>com/ssh/bean/WiredEnterpriseUser.hbm.xml</value>
+				<value>
+					com/ssh/bean/SiteserverPublishmentSystem.hbm.xml
+				</value>
+				<value>com/ssh/bean/WiredTvn.hbm.xml</value>
+				<value>com/ssh/bean/SiteserverNode.hbm.xml</value>
+				<value>com/ssh/bean/SiteserverGatherRule.hbm.xml</value>
+				<value>com/ssh/bean/SiteserverSeoMeta.hbm.xml</value>
+				<value>
+					com/ssh/bean/SiteserverMenuDisplay.hbm.xml
+				</value>
+				<value>
+					com/ssh/bean/SiteserverTemplateLog.hbm.xml
+				</value>
+				<value>com/ssh/bean/SiteserverTemplate.hbm.xml</value>
+				<value>
+					com/ssh/bean/SiteserverTemplateMatch.hbm.xml
+				</value>
+				<value>com/ssh/bean/SiteserverComment.hbm.xml</value>
+				<value>
+					com/ssh/bean/SiteserverSystemPermissions.hbm.xml
+				</value>
+				<value>
+					com/ssh/bean/SiteserverGatherDatabaseRule.hbm.xml
+				</value>
+				<value>
+					com/ssh/bean/SiteserverSeoMetasInNodes.hbm.xml
+				</value>
+				<value>
+					com/ssh/bean/SiteserverGatherFileRule.hbm.xml
+				</value>
+				<value>com/ssh/bean/SiteserverTracking.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="txManager" />
+
+</beans>
