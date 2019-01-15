@@ -10,19 +10,20 @@
 
 	<script>
 		//待测试数组
-		var list = [ 1, 2, 3, 4, 8080, 123456789 ];
+		var list = [ 1, 2, 3, 4, 8080, 123456789, 10000000000000 ];
 		var Max = findMax(list);
-		alert(Max);
-		//document.getElementById("demo").innerHTML("数组中的最大值为： "+ Max);
-		
+		//alert(Max);
+		document.getElementById("demo").innerHTML = "数组中的最大数为： " + Max;
+	
 		//获取数组中的最大值
 		function findMax(numlist) {
 			var i;
 			//数组第一个元素赋值给max
 			var max = numlist[0];
 			//如果数组只有一个元素，直接赋值给max
-			if (numlist.length == 1)  max = numlist[0];
-			
+			if (numlist.length == 1)
+				max = numlist[0];
+	
 			//遍历数组元素，将最大值赋给max
 			for (i = 0; i < numlist.length; i++) {
 				if (numlist[i] > max)
