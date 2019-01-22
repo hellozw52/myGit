@@ -92,17 +92,35 @@
 		}
 	}
 	
+	/* 单选 */
+	function getSelected(){
+		var row = $('#dg_book').datagrid('getSelected');
+		if (row){
+			alert('isbn: '+row.isbn+"\ntitle: "+row.title);
+		}
+	}
+	
+	/* 多选 */
+	function getSelections(){
+		var ids = [];
+		var rows = $('#dg_book').datagrid('getSelections');
+		for(var i=0; i<rows.length; i++){
+			ids.push(rows[i].isbn);
+		}
+		alert(ids.join('\n'));
+	}
+	
 </script>
 
 <!-- 数据展示表格 -->
 <table id="dg_book" title="图书列表" class="easyui-datagrid"
 	style="overflow:auto;"
-	data-options="toolbar:'#toolbar_book',pagination:true,singleSelect:true,collapsible:true,url:'../book/list',pageSize:15,pageList:[ 5, 10, 15, 20 ]">
+	data-options="toolbar:'#toolbar_book',pagination:true,rownumbers:true,singleSelect:true,collapsible:true,url:'../book/list',pageSize:15,pageList:[ 5, 10, 15, 20 ]">
 	<!-- 表头 -->
 	<thead>
 		<tr>
 			<!-- 表头字段 -->
-			<th field="id" width="80">自增ID</th>
+			<th field="id" width="80" checkbox="true">自增ID</th>
 			<th field="isbn" width="200">图书编号</th>
 			<th field="title" width="300">图书名称</th>
 			<th field="publisher" width="200">出版机构</th>
@@ -123,6 +141,14 @@
 		iconCls="icon-edit" plain="true" onclick="edit()">编辑</a> 
 		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
 		onclick="destroy()">删除</a>
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<!-- 选择模式 -->
+		<span>Selection Mode: </span>
+		<select onchange="$('#dg_book').datagrid({singleSelect:(this.value==0)})">
+			<option value="0">Single Row</option>
+			<option value="1">Multiple Rows</option>
+		</select>
 		<br>
 		
 		<!-- 联合查询工具栏 -->
@@ -140,6 +166,12 @@
 		
 		<a href="#" id="btn_search_book" class="easyui-linkbutton"
 			iconCls="icon-search" plain="true" onclick="doSearch()">Search</a>
+			
+		<a href="#" id="btn_get_book" class="easyui-linkbutton"
+			plain="true" onclick="getSelected()">测试单选</a>
+			
+		<a href="#" id="btn_get_books" class="easyui-linkbutton"
+			plain="true" onclick="getSelections()">测试多选（图书编号）</a>
 		
 	</div>
 		
