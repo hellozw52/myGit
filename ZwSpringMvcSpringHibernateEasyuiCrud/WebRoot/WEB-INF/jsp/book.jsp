@@ -96,7 +96,7 @@
 	function getSelected(){
 		var row = $('#dg_book').datagrid('getSelected');
 		if (row){
-			alert('isbn: '+row.isbn+"\ntitle: "+row.title);
+			alert("isbn: "+row.isbn+"\n"+"title: "+row.title);
 		}
 	}
 	
