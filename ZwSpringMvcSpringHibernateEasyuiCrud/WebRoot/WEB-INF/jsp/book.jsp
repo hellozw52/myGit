@@ -119,8 +119,9 @@
 	<!-- 表头 -->
 	<thead>
 		<tr>
-			<!-- 表头字段 -->
-			<th field="id" width="80" checkbox="true">自增ID</th>
+			<!-- 表头字段  设置第一列为复选框-->
+			<th field="ck" checkbox="true"></th>
+			<th field="id" width="80">id</th>
 			<th field="isbn" width="200">图书编号</th>
 			<th field="title" width="300">图书名称</th>
 			<th field="publisher" width="200">出版机构</th>
@@ -144,10 +145,10 @@
 		
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<!-- 选择模式 -->
-		<span>Selection Mode: </span>
+		<span>选择模式: </span>
 		<select onchange="$('#dg_book').datagrid({singleSelect:(this.value==0)})">
-			<option value="0">Single Row</option>
-			<option value="1">Multiple Rows</option>
+			<option value="0">单选</option>
+			<option value="1">多选</option>
 		</select>
 		<br>
 		
