@@ -36,6 +36,41 @@
 		}
 	}
 	
+	/* 多行删 */
+	function deletemany() {
+		//获取选中行的数据,返回的是数组
+		var selectRows = $('#dg_book').datagrid('getSelections');
+		//如果没有选中行的话，提示信息
+	    if (selectRows.length < 1) {
+	        $.messager.alert("提示消息", "请选择要删除的记录！", 'info');
+	        return;
+	    }
+	    //如果选中行了，则要进行判断
+	    $.messager.confirm("确认消息", "确定要删除所选记录吗？", function (isDelete) {
+	 
+	        //如果为真的话
+	        if (isDelete) {
+	            //定义变量值
+	            var strIds = "";
+	            //拼接字符串，这里也可以使用数组，作用一样
+	            for (var i = 0; i < selectRows.length; i++) {
+	                strIds += selectRows[i].id + ",";
+	            }
+	            //循环切割
+strIds = strIds.substr(0, strIds.length - 1);
+	            $.post('/JudgeItem/DeleteJudgeItem?id=' + strIds, function (jsonObj) {
+	                if (jsonObj > 0) {
+	                    $.messager.alert('提示', '删除成功！');
+	                    $("#dg").datagrid("reload"); //删除成功后 刷新页面
+	                } else {
+	 
+	                    $.messager.alert('提示信息', '删除失败，请联系管理员！', 'warning');
+	                }
+	            }, "JSON");
+	        }
+		});
+	}
+	
 	/* 改 */
 	//打开一个对话框并从 datagrid 选择的行中加载表单数据。
 	function edit() {
@@ -110,16 +145,28 @@
 		alert(ids.join('\n'));
 	}
 	
+	/* 设置datagride属性 */
+	$('#dg_book').datagrid({
+	    title:'图书列表',
+	    url:'../book/list',
+	    overflow:'auto',
+	    toolbar:'#toolbar_book',
+	    pagination:true,
+	    rownumbers:true,
+	    singleSelect:true,
+	    collapsible:true,
+	    pageSize:15,
+	    pageList:[ 5, 10, 15, 20, 100 ]
+	});
+	
 </script>
 
 <!-- 数据展示表格 -->
-<table id="dg_book" title="图书列表" class="easyui-datagrid"
-	style="overflow:auto;"
-	data-options="toolbar:'#toolbar_book',pagination:true,rownumbers:true,singleSelect:true,collapsible:true,url:'../book/list',pageSize:15,pageList:[ 5, 10, 15, 20 ]">
+<table id="dg_book">
 	<!-- 表头 -->
 	<thead>
 		<tr>
-			<!-- 表头字段  设置第一列为复选框-->
+			<!-- 表头字段  设置第一列为复选框  图书编号列可排序-->
 			<th field="ck" checkbox="true"></th>
 			<th field="id" width="80">id</th>
 			<th field="isbn" width="200">图书编号</th>
