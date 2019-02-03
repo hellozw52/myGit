@@ -228,4 +228,36 @@ public class BookController extends BaseController{
 	}
 	return null;
     }
+    
+    /**
+     * deletemany
+     * @param request
+     * @param response
+     * @param ids
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/deletemany")
+    public String deletemany(
+    	    HttpServletRequest request,
+    	    HttpServletResponse response,
+    	    @RequestParam("ids") String ids
+    	    ) throws Exception {
+    	try {
+    		
+            //将字符串输出为数组
+            String[] bookids = ids.split(",");
+            //循环调用后台方法删除
+            for (int i = 0; i < bookids.length; i++){
+            	SsmBook book = this.bookService.getById(Integer.parseInt(bookids[i]));
+            	this.bookService.delete(book);
+            }
+    	    result = "{\"success\":true}";
+    	    StringUtil.writeToWeb(result, "html",response);
+    	} catch (Exception e) {
+    	    result = "{\"errorMsg\":\"删除失败\"}";
+    	    StringUtil.writeToWeb(result, "html",response);
+    	}
+    	return null;
+        }
 }

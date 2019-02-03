@@ -56,17 +56,20 @@
 	            for (var i = 0; i < selectRows.length; i++) {
 	                strIds += selectRows[i].id + ",";
 	            }
-	            //循环切割
-strIds = strIds.substr(0, strIds.length - 1);
-	            $.post('/JudgeItem/DeleteJudgeItem?id=' + strIds, function (jsonObj) {
-	                if (jsonObj > 0) {
-	                    $.messager.alert('提示', '删除成功！');
+	            //删除最后一个字符","
+				strIds = strIds.substr(0, strIds.length - 1);
+	            $.post('../book/deletemany?ids=' + strIds, function (result) {
+	            	alert(strIds);
+	                if (result.success) {
+	                    $.messager.alert('提示', '批量删除成功！');
 	                    $("#dg").datagrid("reload"); //删除成功后 刷新页面
 	                } else {
-	 
-	                    $.messager.alert('提示信息', '删除失败，请联系管理员！', 'warning');
+	                    $.messager.show({ // show error message
+								title : 'Error',
+								msg : result.errorMsg
+						});
 	                }
-	            }, "JSON");
+	            });
 	        }
 		});
 	}
@@ -189,6 +192,8 @@ strIds = strIds.substr(0, strIds.length - 1);
 		iconCls="icon-edit" plain="true" onclick="edit()">编辑</a> 
 		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
 		onclick="destroy()">删除</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+		onclick="deletemany()">批量删除</a>
 		
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<!-- 选择模式 -->
