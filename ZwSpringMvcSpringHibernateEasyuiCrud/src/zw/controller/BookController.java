@@ -209,31 +209,34 @@ public class BookController extends BaseController{
      * @return
      * @throws Exception
      */
+    /* 
     @RequestMapping("/delete")
     public String delete(
 	    HttpServletRequest request,
 	    HttpServletResponse response,
 	    @RequestParam("id") String id
 	    ) throws Exception {
-	try {
-	    // 获取待删除条目
-	    SsmBook book = this.bookService.getById(Integer.parseInt(id));
-	    // 删除条目
-	    this.bookService.delete(book);
-	    result = "{\"success\":true}";
-	    StringUtil.writeToWeb(result, "html",response);
-	} catch (Exception e) {
-	    result = "{\"errorMsg\":\"删除失败\"}";
-	    StringUtil.writeToWeb(result, "html",response);
-	}
-	return null;
+		try {
+		    // 获取待删除条目
+		    SsmBook book = this.bookService.getById(Integer.parseInt(id));
+		    // 删除条目
+		    this.bookService.delete(book);
+		    result = "{\"success\":true}";
+		    StringUtil.writeToWeb(result, "html",response);
+		} catch (Exception e) {
+		    result = "{\"errorMsg\":\"删除失败\"}";
+		    StringUtil.writeToWeb(result, "html",response);
+		}
+		return null;
     }
+    */
     
     /**
+     * 删除--可批量操作
      * deletemany
      * @param request
      * @param response
-     * @param ids
+     * @param ids 待删除的字符串，例如： 1001,2001,3001
      * @return
      * @throws Exception
      */
@@ -249,10 +252,12 @@ public class BookController extends BaseController{
             String[] bookids = ids.split(",");
             //循环调用后台方法删除
             for (int i = 0; i < bookids.length; i++){
-            	SsmBook book = this.bookService.getById(Integer.parseInt(bookids[i]));
+            	String bookid = bookids[i];
+            	SsmBook book = this.bookService.getById(Integer.parseInt(bookid));
             	this.bookService.delete(book);
             }
     	    result = "{\"success\":true}";
+    	    //System.out.println(result);
     	    StringUtil.writeToWeb(result, "html",response);
     	} catch (Exception e) {
     	    result = "{\"errorMsg\":\"删除失败\"}";

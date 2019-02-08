@@ -16,6 +16,7 @@
 	/* 删 */
 	//移除一行之前,我们将显示一个确认对话框让用户决定是否真的移除该行数据。当移除数据成功之后，调用 'reload'方法来刷新 datagrid数据。
 	//用户可以在与消息框交互后使用回调函数function(r)来完成一些动作。
+	/* 
 	function destroy() {
 		var row = $('#dg_book').datagrid('getSelected');
 		if (row) {
@@ -34,42 +35,46 @@
 				}
 			});
 		}
-	}
+	} 
+	*/
 	
-	/* 多行删 */
+	/* 删除--可批量 */
 	function deletemany() {
-		//获取选中行的数据,返回的是数组
+		//获取选中行的数据,如果是多行返回的是数组。
 		var selectRows = $('#dg_book').datagrid('getSelections');
+		//所选条数
+		var selectNum = selectRows.length;
+		//alert(selectNum);
 		//如果没有选中行的话，提示信息
-	    if (selectRows.length < 1) {
+	    if (selectNum < 1) {
 	        $.messager.alert("提示消息", "请选择要删除的记录！", 'info');
 	        return;
 	    }
 	    //如果选中行了，则要进行判断
-	    $.messager.confirm("确认消息", "确定要删除所选记录吗？", function (isDelete) {
+	    $.messager.confirm("确认消息", "确定要删除所选 <span style='color: red;'>"+selectNum+"</span> 条记录吗？", function (isDelete) {
 	 
 	        //如果为真的话
 	        if (isDelete) {
 	            //定义变量值
 	            var strIds = "";
 	            //拼接字符串，这里也可以使用数组，作用一样
-	            for (var i = 0; i < selectRows.length; i++) {
+	            for (var i = 0; i < selectNum; i++) {
 	                strIds += selectRows[i].id + ",";
 	            }
 	            //删除最后一个字符","
 				strIds = strIds.substr(0, strIds.length - 1);
-	            $.post('../book/deletemany?ids=' + strIds, function (result) {
-	            	alert(strIds);
+				//alert(strIds);
+	            $.post('../book/deletemany',{ids:strIds} ,function (result) {
 	                if (result.success) {
-	                    $.messager.alert('提示', '批量删除成功！');
-	                    $("#dg").datagrid("reload"); //删除成功后 刷新页面
+	                    $.messager.alert("提示", "删除 <span style='color: red;'>"+selectNum+"</span> 条数据，成功！！！");
+	                    $('#dg_book').datagrid('reload'); //删除成功后 刷新页面
 	                } else {
 	                    $.messager.show({ // show error message
 								title : 'Error',
 								msg : result.errorMsg
 						});
 	                }
-	            });
+	            }, 'json');
 	        }
 		});
 	}
@@ -130,24 +135,6 @@
 		}
 	}
 	
-	/* 单选 */
-	function getSelected(){
-		var row = $('#dg_book').datagrid('getSelected');
-		if (row){
-			alert("isbn: "+row.isbn+"\n"+"title: "+row.title);
-		}
-	}
-	
-	/* 多选 */
-	function getSelections(){
-		var ids = [];
-		var rows = $('#dg_book').datagrid('getSelections');
-		for(var i=0; i<rows.length; i++){
-			ids.push(rows[i].isbn);
-		}
-		alert(ids.join('\n'));
-	}
-	
 	/* 设置datagride属性 */
 	$('#dg_book').datagrid({
 	    title:'图书列表',
@@ -190,10 +177,10 @@
 		onclick="add()">添加</a> 
 		<a href="#" class="easyui-linkbutton"
 		iconCls="icon-edit" plain="true" onclick="edit()">编辑</a> 
+		<!-- <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+		onclick="destroy()">删除</a> -->
 		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-		onclick="destroy()">删除</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-		onclick="deletemany()">批量删除</a>
+		onclick="deletemany()">删除(可批量删除)</a>
 		
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<!-- 选择模式 -->
@@ -219,12 +206,6 @@
 		
 		<a href="#" id="btn_search_book" class="easyui-linkbutton"
 			iconCls="icon-search" plain="true" onclick="doSearch()">Search</a>
-			
-		<a href="#" id="btn_get_book" class="easyui-linkbutton"
-			plain="true" onclick="getSelected()">测试单选</a>
-			
-		<a href="#" id="btn_get_books" class="easyui-linkbutton"
-			plain="true" onclick="getSelections()">测试多选（图书编号）</a>
 		
 	</div>
 		
