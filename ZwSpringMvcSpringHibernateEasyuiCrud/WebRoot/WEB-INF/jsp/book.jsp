@@ -70,8 +70,8 @@
 	                    $('#dg_book').datagrid('reload'); //删除成功后 刷新页面
 	                } else {
 	                    $.messager.show({ // show error message
-								title : 'Error',
-								msg : result.errorMsg
+							title : 'Error',
+							msg : result.errorMsg
 						});
 	                }
 	            }, 'json');
